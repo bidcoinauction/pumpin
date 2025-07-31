@@ -7,131 +7,158 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brand-purple: #8b5cf6;
             --brand-orange: #f97316;
-            --bg-dark: #111827;
-            --bg-light: #1f2937;
-            --text-main: #e5e7eb;
-            --text-muted: #9ca3af;
+            --bg-parchment: #fdf6e3;
+            --text-dark-brown: #4e423a;
+            --text-light-brown: #6d5f54;
+            --border-scroll: #c8a077;
+            --bg-stone: #d1c7b8;
         }
         html {
             scroll-behavior: smooth;
         }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            font-family: 'EB Garamond', serif;
+            background-color: var(--bg-parchment);
+            color: var(--text-dark-brown);
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d1c7b8" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+        .heading-font {
+            font-family: 'MedievalSharp', cursive;
         }
         .header-bg {
-            background-color: rgba(17, 24, 39, 0.8);
+            background-color: rgba(253, 246, 227, 0.8);
             backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--border-scroll);
         }
-        .brand-gradient-text {
-            background: linear-gradient(to right, var(--brand-purple), var(--brand-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .brand-text {
+            color: var(--brand-orange);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
         .button-primary {
-            background-color: var(--brand-purple);
-            color: #ffffff;
-            font-weight: 700;
-            transition: all 0.3s ease;
+            background-color: var(--text-dark-brown);
+            color: var(--bg-parchment);
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1.1rem;
+            border: 2px solid #3a312b;
+            border-radius: 0.25rem;
+            box-shadow: inset 0 -2px 0 #2c2521;
+            transition: all 0.2s ease;
         }
         .button-primary:hover {
-            background-color: #7c3aed;
+            background-color: #3a312b;
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         .button-secondary {
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            font-weight: 700;
-            border: 1px solid #374151;
-            transition: all 0.3s ease;
+            background-color: transparent;
+            color: var(--text-dark-brown);
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1.1rem;
+            border: 2px solid var(--text-dark-brown);
+            border-radius: 0.25rem;
+            transition: all 0.2s ease;
         }
         .button-secondary:hover {
-            background-color: #374151;
-            border-color: #4b5563;
+            background-color: var(--text-dark-brown);
+            color: var(--bg-parchment);
         }
-        .feature-card {
-            background-color: var(--bg-light);
-            border-radius: 1rem;
+        .stone-card {
+            background-color: var(--bg-stone);
+            border-radius: 0.5rem;
             padding: 2rem;
-            border: 1px solid #374151;
-            transition: all 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--brand-purple);
+            border: 1px solid #b9ad9e;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.3);
+            text-align: center;
         }
         .icon-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 3rem;
-            width: 3rem;
-            border-radius: 0.75rem;
-            background-color: rgba(139, 92, 246, 0.1);
-            margin-bottom: 1rem;
+            height: 3.5rem;
+            width: 3.5rem;
+            border-radius: 9999px;
+            background-color: rgba(78, 66, 58, 0.1);
+            margin: 0 auto 1rem auto;
+            border: 2px solid var(--text-light-brown);
         }
         .icon-wrapper svg {
-            color: var(--brand-purple);
+            color: var(--text-dark-brown);
         }
         .roadmap-line {
-            height: 4px;
-            background: linear-gradient(90deg, var(--brand-purple) 0%, var(--brand-orange) 100%);
+            height: 3px;
+            background-image: linear-gradient(to right, #a58a67, #7d654c);
             position: absolute;
-            top: 12px;
-            left: 0;
-            right: 0;
+            top: 18px;
+            left: 5%;
+            width: 90%;
             z-index: -1;
         }
         .roadmap-item .dot {
-            height: 28px;
-            width: 28px;
+            height: 40px;
+            width: 40px;
             border-radius: 9999px;
-            background-color: var(--bg-dark);
-            border: 4px solid var(--brand-orange);
-            transition: all 0.3s ease;
+            background-color: var(--brand-orange);
+            border: 4px solid var(--text-dark-brown);
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.7);
         }
-        .roadmap-item:hover .dot {
-            transform: scale(1.1);
-            border-color: var(--brand-purple);
+        .legend-scroll {
+            background: #fdf6e3;
+            color: #583c24;
+            border: 10px solid #d4b996;
+            border-image: linear-gradient(to bottom, #c8a077, #e7cfa9) 1;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            padding: 3rem;
+            border-radius: 5px;
         }
-        
-        @keyframes hero-glow {
-            0% { filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.4)); }
-            50% { filter: drop-shadow(0 0 25px rgba(249, 115, 22, 0.6)); }
-            100% { filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.4)); }
+        .legend-title {
+            font-family: 'MedievalSharp', cursive;
+            font-size: 3rem;
+            color: #6d4c41;
+            text-align: center;
+            margin-bottom: 1rem;
         }
-        .hero-mascot {
-            animation: hero-glow 3s infinite ease-in-out;
+        .legend-text {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+        .legend-separator {
+            border: 0;
+            height: 2px;
+            background-image: linear-gradient(to right, rgba(109, 76, 65, 0), rgba(109, 76, 65, 0.75), rgba(109, 76, 65, 0));
+            margin: 2rem 0;
+        }
+        .section-divider {
+            height: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20"><path d="M0 10 Q 25 20, 50 10 T 100 10" stroke="%23c8a077" fill="none" stroke-width="2"/></svg>');
+            background-repeat: repeat-x;
+            background-position: center;
+            margin: 3rem 0;
         }
     </style>
 </head>
-<body class="text-gray-200">
+<body>
 
     <!-- Header -->
-    <header class="header-bg shadow-lg sticky top-0 z-50 border-b border-gray-800">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <header class="header-bg shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center">
-                <span class="text-3xl font-black brand-gradient-text">$Pumpin</span>
+                <span class="text-4xl heading-font brand-text">$Pumpin</span>
             </div>
-            <div class="hidden md:flex items-center space-x-8 font-medium text-gray-400">
-                <a href="#hero" class="hover:text-white transition duration-300">Home</a>
-                <a href="#story" class="hover:text-white transition duration-300">Legend</a>
-                <a href="#solana-advantage" class="hover:text-white transition duration-300">Advantage</a>
-                <a href="#the-pump-station" class="hover:text-white transition duration-300">Pump Station</a>
-                <a href="#pumpinomics" class="hover:text-white transition duration-300">Pumpinomics</a>
-                <a href="#roadmap" class="hover:text-white transition duration-300">Roadmap</a>
+            <div class="hidden md:flex items-center space-x-8 font-medium text-lg text-light-brown">
+                <a href="#hero" class="hover:text-dark-brown transition duration-300">Home</a>
+                <a href="#story" class="hover:text-dark-brown transition duration-300">Legend</a>
+                <a href="#solana-advantage" class="hover:text-dark-brown transition duration-300">Advantage</a>
+                <a href="#the-pump-station" class="hover:text-dark-brown transition duration-300">Pump Station</a>
+                <a href="#pumpinomics" class="hover:text-dark-brown transition duration-300">Pumpinomics</a>
+                <a href="#roadmap" class="hover:text-dark-brown transition duration-300">Roadmap</a>
             </div>
-            <a href="dashboard.html" class="button-primary py-2 px-6 rounded-lg">
+            <a href="dashboard.html" class="button-primary py-2 px-6">
                 Launch App
             </a>
         </nav>
@@ -142,187 +169,185 @@
         <main id="home-page">
             
             <!-- Hero Section -->
-            <section id="hero" class="text-center py-24 bg-grid-pattern">
+            <section id="hero" class="text-center py-24">
                 <div class="container mx-auto px-6">
-                    <h1 class="text-4xl md:text-7xl font-black text-white leading-tight">
-                        $PUMPIN – The Official <span class="brand-gradient-text">Currency of Shilling</span>
+                    <h1 class="text-5xl md:text-8xl heading-font text-dark-brown leading-tight">
+                        $PUMPIN – The <span class="brand-text">Currency of Shilling</span>
                     </h1>
-                    <p class="text-lg md:text-2xl mt-6 max-w-3xl mx-auto text-gray-300 font-medium">
+                    <p class="text-xl md:text-2xl mt-6 max-w-3xl mx-auto text-light-brown font-medium">
                         Post it. Shill it. Pump it.
                     </p>
-                    <p class="text-md md:text-lg mt-2 max-w-3xl mx-auto text-gray-400">
+                    <p class="text-lg md:text-xl mt-2 max-w-3xl mx-auto text-light-brown">
                         Powered by Peter Pumpin – Solana’s patron saint of degens.
                     </p>
                     <div class="mt-10 flex justify-center items-center space-x-4">
-                        <a href="https://raydium.io/" target="_blank" class="button-primary py-4 px-10 rounded-lg text-lg">
+                        <a href="https://raydium.io/" target="_blank" class="button-primary py-4 px-10 text-xl">
                             Buy $PUMPIN
                         </a>
-                        <a href="#community-hub" class="button-secondary py-4 px-10 rounded-lg text-lg">
+                        <a href="#community-hub" class="button-secondary py-4 px-10 text-xl">
                             Join Community
                         </a>
                     </div>
-                    <div class="mt-16 hero-mascot">
-                         <div class="mt-16 hero-mascot">
-                        <!-- Peter Pumpin Mascot Image -->
-                        <img src="https://updatedcardscript.standard.us-east-1.oortstorages.com/peterpumpin.png" alt="Peter Pumpin Mascot" class="h-56 mx-auto">
+                    <div class="mt-16">
+                        <img src="https://updatedcardscript.standard.us-east-1.oortstorages.com/peterpumpin.png" alt="Peter Pumpin Mascot" class="h-56 mx-auto" style="filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.3));">
                     </div>
                 </div>
             </section>
+
+            <div class="section-divider"></div>
 
             <!-- Story Section -->
-            <section id="story" class="container mx-auto px-6 py-24">
-                <h2 class="text-4xl font-black text-center mb-4">The Legend of <span class="brand-gradient-text">Peter Pumpin</span></h2>
-                <p class="text-center text-lg text-gray-400 max-w-3xl mx-auto mb-16">This isn’t just a coin. It’s a movement. A chaotic-good, relentlessly positive swarm of degens who refuse to fade quietly.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="feature-card text-center">
-                        <div class="icon-wrapper mx-auto">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <p class="text-lg text-gray-300">“Long before the world was flooded with botted hype and fake engagement, there was one degen brave enough to flex for the culture.”</p>
-                    </div>
-                    <div class="feature-card text-center">
-                        <div class="icon-wrapper mx-auto">
-                           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        </div>
-                        <p class="text-lg text-gray-300">“Peter Pumpin – a chiseled, jack-o’-lantern-headed legend – rose from the Solana soil to become the patron saint of shilling.”</p>
-                    </div>
-                    <div class="feature-card text-center">
-                        <div class="icon-wrapper mx-auto">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        </div>
-                        <p class="text-lg text-gray-300">“He exists to arm the community with a single mission: Pump your posts. Pump your bags. Pump your vibes.”</p>
+            <section id="story" class="container mx-auto px-6 py-12">
+                <div class="legend-scroll max-w-4xl mx-auto">
+                    <h2 class="legend-title">The Legend of Peter Pumpin</h2>
+                    <p class="legend-text mb-6">
+                        This isn’t just a coin. It’s a movement. A chaotic-good, relentlessly positive swarm of degens who refuse to fade quietly.
+                    </p>
+                    <hr class="legend-separator" />
+                    <div class="space-y-6 legend-text">
+                        <p>“Long before the world was flooded with botted hype and fake engagement, there was one degen brave enough to flex for the culture.”</p>
+                        <p>“Peter Pumpin – a chiseled, jack-o’-lantern-headed legend – rose from the Solana soil to become the patron saint of shilling.”</p>
+                        <p>“He exists to arm the community with a single mission: Pump your posts. Pump your bags. Pump your vibes.”</p>
                     </div>
                 </div>
             </section>
 
+            <div class="section-divider"></div>
+
             <!-- Solana Advantage Section -->
-            <section id="solana-advantage" class="bg-gray-900 py-24">
+            <section id="solana-advantage" class="py-12">
                 <div class="container mx-auto px-6">
-                    <h2 class="text-4xl font-black text-center mb-4">Built Where <span class="brand-gradient-text">Degens Thrive</span></h2>
-                    <p class="text-center text-lg text-gray-400 max-w-3xl mx-auto mb-16">We planted our seeds on Solana because no other chain can handle the pump. Why crawl when you can pump at 50,000 TPS?</p>
+                    <h2 class="text-5xl heading-font text-center mb-4">Built Where <span class="brand-text">Degens Thrive</span></h2>
+                    <p class="text-center text-xl text-light-brown max-w-3xl mx-auto mb-16">We planted our seeds on Solana for no other chain can handle the pump. Why crawl when you can pump at 50,000 TPS?</p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="feature-card">
+                        <div class="stone-card">
                             <div class="icon-wrapper">
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01"></path></svg>
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01"></path></svg>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 text-white">Micro-fees</h3>
-                            <p class="text-gray-400">Pump for fractions of a cent – no more wasting gas on engagement.</p>
+                            <h3 class="text-3xl heading-font mb-2">Micro-fees</h3>
+                            <p class="text-light-brown text-lg">Pump for fractions of a cent – no more wasting gas on engagement.</p>
                         </div>
-                        <div class="feature-card">
+                        <div class="stone-card">
                             <div class="icon-wrapper">
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 text-white">Fast AF</h3>
-                            <p class="text-gray-400">Like, retweet, and pay providers at the literal speed of light.</p>
+                            <h3 class="text-3xl heading-font mb-2">Fast AF</h3>
+                            <p class="text-light-brown text-lg">Like, retweet, and pay providers at the literal speed of light.</p>
                         </div>
-                        <div class="feature-card">
+                        <div class="stone-card">
                             <div class="icon-wrapper">
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7.014A8.003 8.003 0 0117.657 18.657z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1014.12 11.88m-4.242 4.242z"></path></svg>
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7.014A8.003 8.003 0 0117.657 18.657z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1014.12 11.88m-4.242 4.242z"></path></svg>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 text-white">Degen Paradise</h3>
-                            <p class="text-gray-400">Solana is the undisputed meme capital of the world. We're home.</p>
+                            <h3 class="text-3xl heading-font mb-2">Degen Paradise</h3>
+                            <p class="text-light-brown text-lg">Solana is the undisputed meme capital of the world. We're home.</p>
                         </div>
                     </div>
                 </div>
             </section>
             
+            <div class="section-divider"></div>
+
             <!-- The Pump Station Section -->
-            <section id="the-pump-station" class="container mx-auto px-6 py-24">
+            <section id="the-pump-station" class="container mx-auto px-6 py-12">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
-                        <h2 class="text-4xl font-black mb-4">Introducing: <span class="brand-gradient-text">The Pump Station</span></h2>
-                        <p class="text-xl text-gray-300 mb-6">A decentralized marketplace where posts become pumpable assets. You bring the post. We bring the pump.</p>
-                        <ul class="space-y-4 text-lg text-gray-400">
-                            <li class="flex items-start"><span class="text-purple-400 mr-3 mt-1">✓</span><div><span class="font-bold text-white">Buyers:</span> Pay in $PUMPIN to get real, human-powered likes, retweets, or comments.</div></li>
-                            <li class="flex items-start"><span class="text-purple-400 mr-3 mt-1">✓</span><div><span class="font-bold text-white">Providers:</span> Earn $PUMPIN by completing tasks on the platform, creating a Web3 side-hustle.</div></li>
-                            <li class="flex items-start"><span class="text-purple-400 mr-3 mt-1">✓</span><div><span class="font-bold text-white">Trustless Escrow:</span> Payments are held in a smart contract and released automatically upon verification.</div></li>
+                        <h2 class="text-5xl heading-font mb-4">The <span class="brand-text">Pump Station</span></h2>
+                        <p class="text-xl text-light-brown mb-6">A decentralized marketplace where posts become pumpable assets. You bring the post. We bring the pump.</p>
+                        <ul class="space-y-4 text-lg text-light-brown">
+                            <li class="flex items-start"><span class="text-dark-brown mr-3 mt-1">✧</span><div><span class="font-bold text-dark-brown">Buyers:</span> Pay in $PUMPIN to get real, human-powered likes, retweets, or comments.</div></li>
+                            <li class="flex items-start"><span class="text-dark-brown mr-3 mt-1">✧</span><div><span class="font-bold text-dark-brown">Providers:</span> Earn $PUMPIN by completing tasks on the platform, creating a Web3 side-hustle.</div></li>
+                            <li class="flex items-start"><span class="text-dark-brown mr-3 mt-1">✧</span><div><span class="font-bold text-dark-brown">Trustless Escrow:</span> Payments are held in a smart contract and released automatically upon verification.</div></li>
                         </ul>
-                        <a href="dashboard.html" class="inline-block mt-8 button-primary py-3 px-8 rounded-lg text-lg">
+                        <a href="dashboard.html" class="inline-block mt-8 button-primary py-3 px-8 text-lg">
                             Launch The Pump Station
                         </a>
                     </div>
-                    <div class="bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800">
-                        <p class="text-center font-bold text-white mb-6">Crowdsourced Engagement Engine</p>
-                        <div class="space-y-4">
-                            <div class="flex items-center space-x-4"><div class="bg-purple-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">1</div><span class="bg-gray-800 p-3 rounded-lg w-full">Submit Post URL & Pay</span></div>
-                            <div class="flex justify-center"><svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg></div>
-                            <div class="flex items-center space-x-4"><div class="bg-purple-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">2</div><span class="bg-gray-800 p-3 rounded-lg w-full">Funds Held in Escrow</span></div>
-                            <div class="flex justify-center"><svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg></div>
-                            <div class="flex items-center space-x-4"><div class="bg-purple-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">3</div><span class="bg-gray-800 p-3 rounded-lg w-full">Providers Complete Tasks</span></div>
-                            <div class="flex justify-center"><svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg></div>
-                            <div class="flex items-center space-x-4"><div class="bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">✓</div><span class="bg-gray-800 p-3 rounded-lg w-full">Metrics Pumped & Payout</span></div>
+                    <div class="p-8 rounded-lg" style="background-color: #e9e0cf; border: 1px solid #d1c7b8;">
+                        <h3 class="text-3xl heading-font text-center text-dark-brown mb-6">The Crowdsourced Engine</h3>
+                        <div class="space-y-4 text-lg">
+                            <div class="flex items-center space-x-4"><div class="bg-dark-brown text-parchment w-10 h-10 rounded-full flex items-center justify-center font-bold heading-font">1</div><span>Submit Post URL & Pay</span></div>
+                            <div class="h-8 w-px bg-light-brown mx-auto"></div>
+                            <div class="flex items-center space-x-4"><div class="bg-dark-brown text-parchment w-10 h-10 rounded-full flex items-center justify-center font-bold heading-font">2</div><span>Funds Held in Escrow</span></div>
+                            <div class="h-8 w-px bg-light-brown mx-auto"></div>
+                            <div class="flex items-center space-x-4"><div class="bg-dark-brown text-parchment w-10 h-10 rounded-full flex items-center justify-center font-bold heading-font">3</div><span>Providers Complete Tasks</span></div>
+                            <div class="h-8 w-px bg-light-brown mx-auto"></div>
+                            <div class="flex items-center space-x-4"><div class="bg-brand-orange text-white w-10 h-10 rounded-full flex items-center justify-center font-bold heading-font">✓</div><span>Metrics Pumped & Payout</span></div>
                         </div>
                     </div>
                  </div>
             </section>
 
+            <div class="section-divider"></div>
+
             <!-- Pumpinomics Section -->
-            <section id="pumpinomics" class="bg-gray-900 py-24">
+            <section id="pumpinomics" class="py-12">
                 <div class="container mx-auto px-6">
-                    <h2 class="text-4xl font-black text-center mb-4">No Rugs. <span class="brand-gradient-text">Only Pump.</span></h2>
-                    <p class="text-center text-lg text-gray-400 max-w-3xl mx-auto mb-16">$PUMPIN was designed to put the community first, always. Even the founders ape in like everyone else.</p>
+                    <h2 class="text-5xl heading-font text-center mb-4">No Rugs. <span class="brand-text">Only Pump.</span></h2>
+                    <p class="text-center text-xl text-light-brown max-w-3xl mx-auto mb-16">$PUMPIN was designed to put the community first, always. Even the founders ape in like everyone else.</p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="feature-card text-center">
-                            <h3 class="text-2xl font-bold mb-2 text-white">0% Taxes</h3>
-                            <p class="text-gray-400">This is non-negotiable. Trade freely and keep what you earn.</p>
+                        <div class="stone-card">
+                            <h3 class="text-3xl heading-font mb-2">0% Taxes</h3>
+                            <p class="text-light-brown text-lg">This is non-negotiable. Trade freely and keep what you earn.</p>
                         </div>
-                        <div class="feature-card text-center">
-                            <h3 class="text-2xl font-bold mb-2 text-white">LP Burned & Renounced</h3>
-                            <p class="text-gray-400">100% of initial LP is burned. The contract is renounced. No rugs, no excuses.</p>
+                        <div class="stone-card">
+                            <h3 class="text-3xl heading-font mb-2">LP Burned & Renounced</h3>
+                            <p class="text-light-brown text-lg">100% of initial LP is burned. The contract is renounced. No rugs, no excuses.</p>
                         </div>
-                        <div class="feature-card text-center">
-                            <h3 class="text-2xl font-bold mb-2 text-white">Transparent Allocation</h3>
-                            <p class="text-gray-400">40% Airdrop, 40% Liquidity, 20% Treasury. No team allocation.</p>
+                        <div class="stone-card">
+                            <h3 class="text-3xl heading-font mb-2">Transparent Allocation</h3>
+                            <p class="text-light-brown text-lg">40% Airdrop, 40% Liquidity, 20% Treasury. No team allocation.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <div class="section-divider"></div>
+
             <!-- Roadmap Section -->
-            <section id="roadmap" class="container mx-auto px-6 py-24">
-                <h2 class="text-4xl font-black text-center mb-16">Where We’re <span class="brand-gradient-text">Pumpin’ To</span></h2>
+            <section id="roadmap" class="container mx-auto px-6 py-12">
+                <h2 class="text-5xl heading-font text-center mb-24">Where We’re <span class="brand-text">Pumpin’ To</span></h2>
                 <div class="relative">
                     <div class="roadmap-line"></div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                         <div class="roadmap-item">
                             <div class="dot mx-auto mb-4"></div>
-                            <h4 class="font-bold text-lg text-white">Phase 1: The Great Pumpening</h4>
-                            <p class="text-sm text-gray-400 mt-2">Token launch, LP burn, viral airdrop & meme storm.</p>
+                            <h4 class="heading-font text-2xl">Phase 1: The Great Pumpening</h4>
+                            <p class="text-lg text-light-brown mt-2">Token launch, LP burn, viral airdrop & meme storm.</p>
                         </div>
                         <div class="roadmap-item">
                             <div class="dot mx-auto mb-4"></div>
-                            <h4 class="font-bold text-lg text-white">Phase 2: The Utility Drop</h4>
-                            <p class="text-sm text-gray-400 mt-2">Launch "The Pump Station" MVP to create the eternal pump flywheel.</p>
+                            <h4 class="heading-font text-2xl">Phase 2: The Utility Drop</h4>
+                            <p class="text-lg text-light-brown mt-2">Launch "The Pump Station" MVP to create the eternal pump flywheel.</p>
                         </div>
                         <div class="roadmap-item">
                             <div class="dot mx-auto mb-4"></div>
-                            <h4 class="font-bold text-lg text-white">Phase 3: Beyond the Meme</h4>
-                            <p class="text-sm text-gray-400 mt-2">Scale the provider network, partnerships, and new rewarding features.</p>
+                            <h4 class="heading-font text-2xl">Phase 3: Beyond the Meme</h4>
+                            <p class="text-lg text-light-brown mt-2">Scale the provider network, partnerships, and new rewarding features.</p>
                         </div>
                     </div>
                 </div>
             </section>
             
             <!-- Community Hub Section -->
-            <section id="community-hub" class="bg-gray-900 py-24">
+            <section id="community-hub" class="py-24 mt-12" style="background-color: #e9e0cf;">
                 <div class="container mx-auto px-6 text-center">
-                     <h2 class="text-4xl md:text-5xl font-black text-white leading-tight mb-4">Join the <span class="brand-gradient-text">Pumpin’ Legion</span></h2>
-                     <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-400">The community is the beating heart of the project. We don’t follow. We lead. And we do it loud.</p>
+                     <h2 class="text-5xl heading-font text-dark-brown leading-tight mb-4">Join the <span class="brand-text">Pumpin’ Legion</span></h2>
+                     <p class="text-xl max-w-3xl mx-auto text-light-brown">The community is the beating heart of the project. We don’t follow. We lead. And we do it loud.</p>
                      <div class="mt-8 flex justify-center space-x-4">
-                         <a href="https://twitter.com" target="_blank" class="bg-gray-800 hover:bg-gray-700 p-4 rounded-full transition duration-300" title="Twitter (for the memes)">
+                         <a href="https://twitter.com" target="_blank" class="bg-dark-brown hover:bg-black p-4 rounded-full transition duration-300" title="Twitter (for the memes)">
                              <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
                          </a>
-                         <a href="https://t.me" target="_blank" class="bg-gray-800 hover:bg-gray-700 p-4 rounded-full transition duration-300" title="Telegram (for the alpha)">
+                         <a href="https://t.me" target="_blank" class="bg-dark-brown hover:bg-black p-4 rounded-full transition duration-300" title="Telegram (for the alpha)">
                              <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M11.94 1.76l-.49 4.35 15.65-7.79zm-10.74 3.79l-1.46 7.42 16.51-14.73zM5.7 19.34l.11-.47 1.83-8.91 16.51-14.73zM21.5 21.99l-2.07-.6-1.07-5.5-16.11 14.88 4.7 1.63z" fill="currentColor"/></svg>
                          </a>
-                         <a href="https://discord.com" target="_blank" class="bg-gray-800 hover:bg-gray-700 p-4 rounded-full transition duration-300" title="Discord (for the chaos)">
+                         <a href="https://discord.com" target="_blank" class="bg-dark-brown hover:bg-black p-4 rounded-full transition duration-300" title="Discord (for the chaos)">
                              <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20.3,3.5C18.8,3 17.2,3 17.2,3L16.8,3.6C18.4,4.2 19.6,5.2 20.2,6.4C19.1,5.8 17.8,5.3 16.4,5C16.4,5 16.3,4.9 16.2,4.9C14.2,4.3 12.1,4.3 10.1,4.9C10,4.9 9.9,5 9.9,5C8.5,5.3 7.2,5.8 6.1,6.4C6.7,5.2 7.9,4.2 9.5,3.6L9.1,3S7.5,3 6,3.5C3.1,4.9 1.7,8.2 2.2,11.5C3.3,15.2 6.4,17.6 10.1,17.8C10.1,17.8 10.3,17.5 10.5,17.3C9.2,16.8 8.2,16 7.6,15C7.6,15 7.6,15 7.6,14.9C10.2,16.1 13.1,16.1 15.7,14.9C15.7,15 15.7,15 15.7,15C15.1,16 14.1,16.8 12.8,17.3C13,17.5 13.2,17.8 13.2,17.8C16.9,17.6 20,15.2 21.1,11.5C21.6,8.2 20.2,4.9 20.3,3.5M10,12.8C9,12.8 8.2,12 8.2,11S9,9.2 10,9.2S11.8,10 11.8,11S11,12.8 10,12.8M14.7,12.8C13.7,12.8 12.9,12 12.9,11S13.7,9.2 14.7,9.2S16.5,10 16.5,11S15.7,12.8 14.7,12.8Z" fill="currentColor"/></svg>
                          </a>
                      </div>
-                     <div class="mt-8 text-center text-gray-400">
-                        <p class="font-bold text-lg text-orange-400">Stay Pumpin’ – Forever.</p>
-                        <p class="mt-4 text-sm font-mono bg-gray-800 inline-block px-4 py-2 rounded-md">
-                            <span class="font-bold text-gray-500">CA:</span> B9A8D7E6C5F4A3B2C1D0E9F8A7B6C5D4E3F2A1B0
+                     <div class="mt-8 text-center text-light-brown">
+                        <p class="font-bold text-xl heading-font brand-text">Stay Pumpin’ – Forever.</p>
+                        <p class="mt-4 text-sm font-mono bg-dark-brown text-parchment inline-block px-4 py-2 rounded-md">
+                            <span class="font-bold text-gray-400">CA:</span> B9A8D7E6C5F4A3B2C1D0E9F8A7B6C5D4E3F2A1B0
                         </p>
                      </div>
                 </div>
@@ -331,10 +356,10 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-black py-8 border-t border-gray-900">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <p class="font-bold">Powered by Solana. Fueled by Degens.</p>
-            <p class="mt-2 text-xs">&copy; 2025 by $Pumpin. This is a meme coin with real utility, but it’s still crypto – do your own research.</p>
+    <footer class="py-8" style="background-color: #3a312b;">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p class="font-bold text-parchment">Powered by Solana. Fueled by Degens.</p>
+            <p class="mt-2 text-xs text-gray-400">&copy; 2025 by $Pumpin. This is a meme coin with real utility, but it’s still crypto – do your own research.</p>
         </div>
     </footer>
 
