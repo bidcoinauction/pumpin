@@ -7,116 +7,139 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brand-purple: #8b5cf6;
             --brand-orange: #f97316;
-            --bg-dark: #111827;
-            --bg-light: #1f2937;
-            --bg-very-light: #374151;
-            --text-main: #e5e7eb;
-            --text-muted: #9ca3af;
-            --border-color: #374151;
+            --bg-parchment: #fdf6e3;
+            --bg-parchment-darker: #e9e0cf;
+            --text-dark-brown: #4e423a;
+            --text-light-brown: #6d5f54;
+            --border-scroll: #c8a077;
+            --bg-stone: #d1c7b8;
         }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            font-family: 'EB Garamond', serif;
+            background-color: var(--bg-parchment);
+            color: var(--text-dark-brown);
         }
-        .brand-gradient-text {
-            background: linear-gradient(to right, var(--brand-purple), var(--brand-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .heading-font {
+            font-family: 'MedievalSharp', cursive;
+        }
+        .brand-text {
+            color: var(--brand-orange);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
         .button-primary {
-            background-color: var(--brand-purple);
-            color: #ffffff;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            background-color: var(--text-dark-brown);
+            color: var(--bg-parchment);
+            font-family: 'MedievalSharp', cursive;
+            font-size: 1.1rem;
+            border: 2px solid #3a312b;
+            border-radius: 0.25rem;
+            box-shadow: inset 0 -2px 0 #2c2521;
+            transition: all 0.2s ease;
         }
         .button-primary:hover {
-            background-color: #7c3aed;
+            background-color: #3a312b;
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         .button-primary:disabled {
-            background-color: #4b5563;
+            background-color: #9e8a7e;
+            color: #d1c7b8;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+            border-color: #8a786a;
+        }
+        .sidebar {
+            background-color: var(--bg-parchment-darker);
+            border-right: 2px solid var(--border-scroll);
         }
         .sidebar-link {
             display: flex;
             align-items: center;
             padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            color: var(--text-muted);
-            font-weight: 500;
+            border-radius: 0.25rem;
+            color: var(--text-light-brown);
+            font-weight: 600;
+            font-size: 1.1rem;
             transition: all 0.2s ease-in-out;
         }
         .sidebar-link:hover {
-            background-color: var(--bg-light);
-            color: var(--text-main);
+            background-color: rgba(78, 66, 58, 0.1);
+            color: var(--text-dark-brown);
         }
         .sidebar-link.active {
-            background-color: var(--brand-purple);
-            color: white;
-            font-weight: 600;
+            background-color: var(--text-dark-brown);
+            color: var(--bg-parchment);
         }
         .social-tab {
             display: flex;
             align-items: center;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            background-color: var(--bg-light);
+            padding: 0.75rem 1.25rem;
+            border: 2px solid var(--border-scroll);
+            border-radius: 0.25rem;
+            background-color: var(--bg-parchment);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: all 0.2s ease-in-out;
+            font-weight: 600;
         }
         .social-tab:hover {
-            border-color: var(--brand-purple);
-            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: var(--brand-orange);
         }
         .social-tab.active {
-            border-color: var(--brand-purple);
-            background-color: var(--brand-purple);
-            color: white;
-            font-weight: 600;
+            background-color: var(--text-dark-brown);
+            color: var(--bg-parchment);
+            border-color: #3a312b;
+        }
+        .service-table-container {
+            background: #fdf6e3;
+            border: 10px solid #d4b996;
+            border-image: linear-gradient(to bottom, #c8a077, #e7cfa9) 1;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-radius: 5px;
         }
         .service-row {
             cursor: pointer;
             transition: background-color 0.2s ease-in-out;
         }
         .service-row:hover {
-            background-color: var(--bg-very-light);
+            background-color: var(--bg-parchment-darker);
         }
         .service-row.selected {
-            background-color: var(--brand-purple) !important;
+            background-color: var(--brand-orange) !important;
             color: white;
-            font-weight: 600;
+            font-weight: 700;
+        }
+        .service-row.selected td {
+            color: white !important;
         }
         input[type="text"], input[type="number"] {
-            background-color: var(--bg-light);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
+            background-color: #fff;
+            border: 2px solid var(--border-scroll);
+            border-radius: 0.25rem;
             padding: 0.75rem 1rem;
-            color: var(--text-main);
+            color: var(--text-dark-brown);
             width: 100%;
+            font-size: 1.1rem;
         }
         input:focus {
             outline: none;
-            border-color: var(--brand-purple);
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
+            border-color: var(--brand-orange);
         }
     </style>
 </head>
 <body>
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <aside class="w-64 bg-gray-900 p-6 border-r border-gray-800 flex-shrink-0 flex flex-col">
+        <aside class="w-64 sidebar p-6 flex-shrink-0 flex flex-col">
             <div class="flex items-center mb-10">
-                <span class="text-3xl font-black brand-gradient-text">$Pumpin</span>
+                <span class="text-4xl heading-font brand-text">$Pumpin</span>
             </div>
             <nav class="flex flex-col space-y-2">
                 <a href="#" class="sidebar-link active">
@@ -137,8 +160,8 @@
                 </a>
             </nav>
             <div class="mt-auto">
-                <a href="/index.html" class="sidebar-link text-sm">
-                   <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                <a href="index.html" class="sidebar-link text-sm">
+                   <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013 3h7a3 3 0 013 3v1"></path></svg>
                     Back to Home
                 </a>
             </div>
@@ -147,8 +170,8 @@
         <!-- Main Content -->
         <div class="flex-1 flex flex-col">
             <!-- Top Header -->
-            <header class="bg-gray-900 border-b border-gray-800 px-8 py-4 flex justify-end">
-                <button class="button-primary py-2 px-6 rounded-lg">Connect Wallet</button>
+            <header class="bg-parchment-darker border-b-2 border-border-scroll px-8 py-4 flex justify-end">
+                <button class="button-primary py-2 px-6">Connect Wallet</button>
             </header>
 
             <!-- Page Content -->
@@ -158,7 +181,7 @@
                     <div class="lg:col-span-2 space-y-8">
                         <!-- Social Network Chooser -->
                         <div>
-                            <h2 class="text-lg font-semibold mb-4 text-white">Choose a Social Network</h2>
+                            <h2 class="text-3xl heading-font mb-4">Choose a Social Network</h2>
                             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
                                 <div class="social-tab active">
                                     <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"></path></svg>
@@ -171,32 +194,32 @@
                         </div>
                         
                         <!-- Services List -->
-                        <div class="bg-gray-900 rounded-lg border border-gray-800">
-                            <h2 class="text-lg font-semibold p-4 border-b border-gray-800 text-white">Instagram Services</h2>
+                        <div class="service-table-container">
+                            <h2 class="text-3xl heading-font p-4 border-b-2 border-border-scroll">Instagram Services</h2>
                             <div class="overflow-x-auto">
-                                <table class="w-full text-left">
-                                    <thead class="border-b border-gray-800 text-sm text-gray-400">
+                                <table class="w-full text-left text-lg">
+                                    <thead class="border-b-2 border-border-scroll text-light-brown">
                                         <tr>
-                                            <th class="p-4 font-medium">ID</th>
-                                            <th class="p-4 font-medium">SERVICE</th>
-                                            <th class="p-4 font-medium text-right">PRICE / 1K</th>
+                                            <th class="p-4 font-semibold">ID</th>
+                                            <th class="p-4 font-semibold">SERVICE</th>
+                                            <th class="p-4 font-semibold text-right">PRICE / 1K</th>
                                         </tr>
                                     </thead>
                                     <tbody id="service-list">
-                                        <tr class="service-row border-b border-gray-800" data-id="101" data-price="50" data-name="Followers [HQ]">
-                                            <td class="p-4">101</td>
-                                            <td class="p-4">Followers [HQ]</td>
-                                            <td class="p-4 text-right">50</td>
+                                        <tr class="service-row border-b-2 border-border-scroll" data-id="101" data-price="50" data-name="Followers [HQ]">
+                                            <td class="p-4 text-light-brown">101</td>
+                                            <td class="p-4 text-dark-brown font-semibold">Followers [HQ]</td>
+                                            <td class="p-4 text-dark-brown font-bold text-right">50</td>
                                         </tr>
-                                        <tr class="service-row border-b border-gray-800" data-id="102" data-price="5" data-name="Likes [Real]">
-                                            <td class="p-4">102</td>
-                                            <td class="p-4">Likes [Real]</td>
-                                            <td class="p-4 text-right">5</td>
+                                        <tr class="service-row border-b-2 border-border-scroll" data-id="102" data-price="5" data-name="Likes [Real]">
+                                            <td class="p-4 text-light-brown">102</td>
+                                            <td class="p-4 text-dark-brown font-semibold">Likes [Real]</td>
+                                            <td class="p-4 text-dark-brown font-bold text-right">5</td>
                                         </tr>
                                         <tr class="service-row" data-id="103" data-price="0.1" data-name="Views [Fast]">
-                                            <td class="p-4">103</td>
-                                            <td class="p-4">Views [Fast]</td>
-                                            <td class="p-4 text-right">0.1</td>
+                                            <td class="p-4 text-light-brown">103</td>
+                                            <td class="p-4 text-dark-brown font-semibold">Views [Fast]</td>
+                                            <td class="p-4 text-dark-brown font-bold text-right">0.1</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -204,17 +227,17 @@
                         </div>
 
                         <!-- Form Inputs -->
-                        <div class="space-y-4">
+                        <div class="space-y-6">
                             <div>
-                                <label for="service-id" class="block text-sm font-medium text-gray-400 mb-2">Service ID</label>
-                                <input type="text" id="service-id" name="service-id" readonly class="bg-gray-700 cursor-not-allowed">
+                                <label for="service-id" class="block text-xl heading-font text-light-brown mb-2">Service ID</label>
+                                <input type="text" id="service-id" name="service-id" readonly class="bg-stone cursor-not-allowed">
                             </div>
                             <div>
-                                <label for="link" class="block text-sm font-medium text-gray-400 mb-2">Link</label>
+                                <label for="link" class="block text-xl heading-font text-light-brown mb-2">Link</label>
                                 <input type="text" id="link" name="link" placeholder="https://...">
                             </div>
                             <div>
-                                <label for="quantity" class="block text-sm font-medium text-gray-400 mb-2">Quantity</label>
+                                <label for="quantity" class="block text-xl heading-font text-light-brown mb-2">Quantity</label>
                                 <input type="number" id="quantity" name="quantity" placeholder="1000">
                             </div>
                         </div>
@@ -222,26 +245,26 @@
 
                     <!-- Right Column -->
                     <div class="lg:col-span-1">
-                        <div class="bg-gray-900 rounded-lg border border-gray-800 p-6 sticky top-8">
-                            <h2 class="text-lg font-semibold mb-4 text-white">Order Details</h2>
-                            <div id="order-details-placeholder" class="text-center text-gray-500 py-8">
+                        <div class="bg-parchment-darker rounded-lg border-2 border-border-scroll p-6 sticky top-8 shadow-lg">
+                            <h2 class="text-3xl heading-font mb-4 text-dark-brown">Order Details</h2>
+                            <div id="order-details-placeholder" class="text-center text-light-brown py-8 text-lg">
                                 Select a service from the list.
                             </div>
                             <div id="order-summary" class="hidden space-y-4">
                                 <div>
-                                    <p class="text-sm text-gray-400">Service</p>
-                                    <p id="summary-service-name" class="font-semibold text-white"></p>
+                                    <p class="text-lg heading-font text-light-brown">Service</p>
+                                    <p id="summary-service-name" class="font-semibold text-xl text-dark-brown"></p>
                                 </div>
                                 <div>
-                                    <p class="text-sm text-gray-400">Price per 1000</p>
-                                    <p class="font-semibold text-white"><span id="summary-service-price"></span> $PUMPIN</p>
+                                    <p class="text-lg heading-font text-light-brown">Price per 1000</p>
+                                    <p class="font-semibold text-xl text-dark-brown"><span id="summary-service-price"></span> $PUMPIN</p>
                                 </div>
-                                <hr class="border-gray-700 my-4">
+                                <hr class="border-border-scroll my-4 border-t-2">
                                 <div class="flex justify-between items-center">
-                                    <span class="text-lg font-semibold text-white">Total Cost:</span>
-                                    <span id="total-cost" class="text-2xl font-bold brand-gradient-text">0 $PUMPIN</span>
+                                    <span class="text-2xl heading-font text-dark-brown">Total Cost:</span>
+                                    <span id="total-cost" class="text-3xl font-bold brand-text">0 $PUMPIN</span>
                                 </div>
-                                <button id="place-order-btn" class="button-primary w-full py-3 rounded-lg mt-4" disabled>
+                                <button id="place-order-btn" class="button-primary w-full py-3 rounded-md mt-4 text-xl" disabled>
                                     Place Order
                                 </button>
                             </div>
@@ -329,3 +352,4 @@
     </script>
 </body>
 </html>
+
