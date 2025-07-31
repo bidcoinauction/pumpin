@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - $Pumpin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-purple: #8b5cf6;
+            --brand-orange: #f97316;
+            --bg-dark: #111827;
+            --bg-light: #1f2937;
+            --bg-very-light: #374151;
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --border-color: #374151;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+        }
+        .brand-gradient-text {
+            background: linear-gradient(to right, var(--brand-purple), var(--brand-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .button-primary {
+            background-color: var(--brand-purple);
+            color: #ffffff;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .button-primary:hover {
+            background-color: #7c3aed;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
+        }
+        .button-primary:disabled {
+            background-color: #4b5563;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+        }
+        .sidebar-link:hover {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+        }
+        .sidebar-link.active {
+            background-color: var(--brand-purple);
+            color: white;
+            font-weight: 600;
+        }
+        .social-tab {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background-color: var(--bg-light);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .social-tab:hover {
+            border-color: var(--brand-purple);
+            color: white;
+        }
+        .social-tab.active {
+            border-color: var(--brand-purple);
+            background-color: var(--brand-purple);
+            color: white;
+            font-weight: 600;
+        }
+        .service-row {
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .service-row:hover {
+            background-color: var(--bg-very-light);
+        }
+        .service-row.selected {
+            background-color: var(--brand-purple) !important;
+            color: white;
+            font-weight: 600;
+        }
+        input[type="text"], input[type="number"] {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-main);
+            width: 100%;
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--brand-purple);
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-900 p-6 border-r border-gray-800 flex-shrink-0 flex flex-col">
+            <div class="flex items-center mb-10">
+                <span class="text-3xl font-black brand-gradient-text">$Pumpin</span>
+            </div>
+            <nav class="flex flex-col space-y-2">
+                <a href="#" class="sidebar-link active">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    New Order
+                </a>
+                <a href="#" class="sidebar-link">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    Orders
+                </a>
+                <a href="#" class="sidebar-link">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                    Buy $PUMPIN
+                </a>
+                <a href="#" class="sidebar-link">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    Services
+                </a>
+            </nav>
+            <div class="mt-auto">
+                <a href="/index.html" class="sidebar-link text-sm">
+                   <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                    Back to Home
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Top Header -->
+            <header class="bg-gray-900 border-b border-gray-800 px-8 py-4 flex justify-end">
+                <button class="button-primary py-2 px-6 rounded-lg">Connect Wallet</button>
+            </header>
+
+            <!-- Page Content -->
+            <main class="flex-1 p-8 overflow-y-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Left/Main Column -->
+                    <div class="lg:col-span-2 space-y-8">
+                        <!-- Social Network Chooser -->
+                        <div>
+                            <h2 class="text-lg font-semibold mb-4 text-white">Choose a Social Network</h2>
+                            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+                                <div class="social-tab active">
+                                    <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"></path></svg>
+                                    Instagram
+                                </div>
+                                <div class="social-tab"><svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.73,18.78 17.93,18.84C17.13,18.91 16.44,18.94 15.84,18.94L15,19C12.81,19 11.2,18.84 10.17,18.56C9.27,18.31 8.69,17.73 8.44,16.83C8.16,15.8 8,14.19 8,12L7.94,11.16C7.94,10.56 7.91,9.87 7.84,9.07C7.78,8.27 7.69,7.64 7.56,7.17C7.31,6.27 6.73,5.69 5.83,5.44C4.8,5.16 3.19,5 2,5L2.84,4.16C3.44,4.06 4.13,4.03 4.93,4C5.73,3.91 6.36,3.82 6.83,3.69C7.73,3.44 8.31,2.86 8.56,1.96C8.84,0.93 9,0.19 9,0.19L10,0H14L14.84,0.16C14.84,0.16 15.16,0.93 15.44,1.96C15.69,2.86 16.27,3.44 17.17,3.69C17.64,3.82 18.27,3.91 19.07,4C19.87,4.03 20.56,4.06 21.16,4.16L22,5C20.81,5 19.2,5.16 18.17,5.44C17.27,5.69 16.69,6.27 16.44,7.17C16.16,8.2 16,9.81 16,12C16,14.19 16.16,15.8 16.44,16.83C16.69,17.73 17.27,18.31 18.17,18.56C19.2,18.84 20.81,19 22,19L21.16,19.84C20.56,19.94 19.87,19.97 19.07,20C18.27,20.09 17.64,20.18 17.17,20.31C16.27,20.56 15.69,21.14 15.44,22.04C15.16,23.07 15,23.81 15,23.81L14,24H10L9.16,23.84C9.16,23.84 8.84,23.07 8.56,22.04C8.31,21.14 7.73,20.56 6.83,20.31C6.36,20.18 5.73,20.09 4.93,20C4.13,19.97 3.44,19.94 2.84,19.84L2,19C3.19,19 4.8,18.84 5.83,18.56C6.73,18.31 7.31,17.73 7.56,16.83C7.84,15.8 8,14.19 8,12C8,9.81 7.84,8.2 7.56,7.17Z"></path></svg>YouTube</div>
+                                <div class="social-tab"><svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>X (Twitter)</div>
+                                <div class="social-tab"><svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M20.3,3.5C18.8,3 17.2,3 17.2,3L16.8,3.6C18.4,4.2 19.6,5.2 20.2,6.4C19.1,5.8 17.8,5.3 16.4,5C16.4,5 16.3,4.9 16.2,4.9C14.2,4.3 12.1,4.3 10.1,4.9C10,4.9 9.9,5 9.9,5C8.5,5.3 7.2,5.8 6.1,6.4C6.7,5.2 7.9,4.2 9.5,3.6L9.1,3S7.5,3 6,3.5C3.1,4.9 1.7,8.2 2.2,11.5C3.3,15.2 6.4,17.6 10.1,17.8C10.1,17.8 10.3,17.5 10.5,17.3C9.2,16.8 8.2,16 7.6,15C7.6,15 7.6,15 7.6,14.9C10.2,16.1 13.1,16.1 15.7,14.9C15.7,15 15.7,15 15.7,15C15.1,16 14.1,16.8 12.8,17.3C13,17.5 13.2,17.8 13.2,17.8C16.9,17.6 20,15.2 21.1,11.5C21.6,8.2 20.2,4.9 20.3,3.5M10,12.8C9,12.8 8.2,12 8.2,11S9,9.2 10,9.2S11.8,10 11.8,11S11,12.8 10,12.8M14.7,12.8C13.7,12.8 12.9,12 12.9,11S13.7,9.2 14.7,9.2S16.5,10 16.5,11S15.7,12.8 14.7,12.8Z"></path></svg>Discord</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Services List -->
+                        <div class="bg-gray-900 rounded-lg border border-gray-800">
+                            <h2 class="text-lg font-semibold p-4 border-b border-gray-800 text-white">Instagram Services</h2>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left">
+                                    <thead class="border-b border-gray-800 text-sm text-gray-400">
+                                        <tr>
+                                            <th class="p-4 font-medium">ID</th>
+                                            <th class="p-4 font-medium">SERVICE</th>
+                                            <th class="p-4 font-medium text-right">PRICE / 1K</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="service-list">
+                                        <tr class="service-row border-b border-gray-800" data-id="101" data-price="50" data-name="Followers [HQ]">
+                                            <td class="p-4">101</td>
+                                            <td class="p-4">Followers [HQ]</td>
+                                            <td class="p-4 text-right">50</td>
+                                        </tr>
+                                        <tr class="service-row border-b border-gray-800" data-id="102" data-price="5" data-name="Likes [Real]">
+                                            <td class="p-4">102</td>
+                                            <td class="p-4">Likes [Real]</td>
+                                            <td class="p-4 text-right">5</td>
+                                        </tr>
+                                        <tr class="service-row" data-id="103" data-price="0.1" data-name="Views [Fast]">
+                                            <td class="p-4">103</td>
+                                            <td class="p-4">Views [Fast]</td>
+                                            <td class="p-4 text-right">0.1</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Form Inputs -->
+                        <div class="space-y-4">
+                            <div>
+                                <label for="service-id" class="block text-sm font-medium text-gray-400 mb-2">Service ID</label>
+                                <input type="text" id="service-id" name="service-id" readonly class="bg-gray-700 cursor-not-allowed">
+                            </div>
+                            <div>
+                                <label for="link" class="block text-sm font-medium text-gray-400 mb-2">Link</label>
+                                <input type="text" id="link" name="link" placeholder="https://...">
+                            </div>
+                            <div>
+                                <label for="quantity" class="block text-sm font-medium text-gray-400 mb-2">Quantity</label>
+                                <input type="number" id="quantity" name="quantity" placeholder="1000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-gray-900 rounded-lg border border-gray-800 p-6 sticky top-8">
+                            <h2 class="text-lg font-semibold mb-4 text-white">Order Details</h2>
+                            <div id="order-details-placeholder" class="text-center text-gray-500 py-8">
+                                Select a service from the list.
+                            </div>
+                            <div id="order-summary" class="hidden space-y-4">
+                                <div>
+                                    <p class="text-sm text-gray-400">Service</p>
+                                    <p id="summary-service-name" class="font-semibold text-white"></p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400">Price per 1000</p>
+                                    <p class="font-semibold text-white"><span id="summary-service-price"></span> $PUMPIN</p>
+                                </div>
+                                <hr class="border-gray-700 my-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-semibold text-white">Total Cost:</span>
+                                    <span id="total-cost" class="text-2xl font-bold brand-gradient-text">0 $PUMPIN</span>
+                                </div>
+                                <button id="place-order-btn" class="button-primary w-full py-3 rounded-lg mt-4" disabled>
+                                    Place Order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const serviceRows = document.querySelectorAll('.service-row');
+            const serviceIdInput = document.getElementById('service-id');
+            const quantityInput = document.getElementById('quantity');
+            const linkInput = document.getElementById('link');
+            
+            const placeholder = document.getElementById('order-details-placeholder');
+            const summary = document.getElementById('order-summary');
+            const summaryServiceName = document.getElementById('summary-service-name');
+            const summaryServicePrice = document.getElementById('summary-service-price');
+            const totalCostEl = document.getElementById('total-cost');
+            const placeOrderBtn = document.getElementById('place-order-btn');
+
+            let selectedService = null;
+
+            function calculateCost() {
+                if (!selectedService || !quantityInput.value) {
+                    totalCostEl.textContent = '0 $PUMPIN';
+                    return;
+                }
+                const quantity = parseInt(quantityInput.value, 10);
+                const pricePer1k = parseFloat(selectedService.price);
+
+                if (isNaN(quantity) || quantity <= 0) {
+                    totalCostEl.textContent = '0 $PUMPIN';
+                    return;
+                }
+
+                const cost = (pricePer1k / 1000) * quantity;
+                totalCostEl.textContent = `${cost.toFixed(4).replace(/\.?0+$/, '')} $PUMPIN`;
+                validateForm();
+            }
+            
+            function validateForm() {
+                const isServiceSelected = !!selectedService;
+                const isLinkValid = linkInput.value.trim().startsWith('http');
+                const isQuantityValid = parseInt(quantityInput.value, 10) > 0;
+                
+                if(isServiceSelected && isLinkValid && isQuantityValid) {
+                    placeOrderBtn.disabled = false;
+                } else {
+                    placeOrderBtn.disabled = true;
+                }
+            }
+
+            serviceRows.forEach(row => {
+                row.addEventListener('click', () => {
+                    // Remove selected class from all rows
+                    serviceRows.forEach(r => r.classList.remove('selected'));
+                    // Add selected class to the clicked row
+                    row.classList.add('selected');
+
+                    selectedService = {
+                        id: row.dataset.id,
+                        price: row.dataset.price,
+                        name: row.dataset.name,
+                    };
+
+                    // Update UI
+                    serviceIdInput.value = selectedService.id;
+                    placeholder.classList.add('hidden');
+                    summary.classList.remove('hidden');
+                    summaryServiceName.textContent = selectedService.name;
+                    summaryServicePrice.textContent = selectedService.price;
+                    
+                    calculateCost();
+                    validateForm();
+                });
+            });
+
+            quantityInput.addEventListener('input', calculateCost);
+            linkInput.addEventListener('input', validateForm);
+        });
+    </script>
+</body>
+</html>

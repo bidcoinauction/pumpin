@@ -3,885 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$PUMPIN - The Premier SMM  Powered by $PUMPIN</title>
+    <title>$Pumpin - The Official Currency of Shilling</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --brand-purple: #8b5cf6;
+            --brand-orange: #f97316;
+            --bg-dark: #111827;
+            --bg-light: #1f2937;
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f4f7fa;
-            /* Ensure body is a flex column to stack header, app-container, and footer */
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Make sure body takes full viewport height */
+            min-height: 100vh;
         }
         .header-bg {
-            background-color: #ffffff;
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
         }
-        .brand-purple {
-            color: #6d28d9;
+        .brand-gradient-text {
+            background: linear-gradient(to right, var(--brand-purple), var(--brand-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .button-purple {
-            background-color: #6d28d9;
+        .button-primary {
+            background-color: var(--brand-purple);
             color: #ffffff;
+            font-weight: 700;
+            transition: all 0.3s ease;
         }
-        .button-purple:hover {
-            background-color: #5b21b6;
+        .button-primary:hover {
+            background-color: #7c3aed;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
         }
-        .tab-active {
-            border-bottom-color: #6d28d9;
-            color: #6d28d9;
-            font-weight: 600;
+        .button-secondary {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            font-weight: 700;
+            border: 1px solid #374151;
+            transition: all 0.3s ease;
         }
-        .tab-inactive {
-            border-bottom-color: transparent;
-            color: #6b7280;
+        .button-secondary:hover {
+            background-color: #374151;
+            border-color: #4b5563;
         }
-        .table-header {
-            background-color: #e5e7eb;
-        }
-        .step-card {
-            background-color: #ffffff;
+        .feature-card {
+            background-color: var(--bg-light);
             border-radius: 1rem;
             padding: 2rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            text-align: center;
+            border: 1px solid #374151;
+            transition: all 0.3s ease;
         }
-        /* Custom Modal Styles */
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000; /* Ensure it's above other content */
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--brand-purple);
         }
-        .modal-content {
-            z-index: 1001; /* Ensure content is above backdrop */
-            max-width: 90%; /* Responsive width */
+        .icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 3rem;
+            width: 3rem;
+            border-radius: 0.75rem;
+            background-color: rgba(139, 92, 246, 0.1);
+            margin-bottom: 1rem;
         }
-
-        /* Dashboard specific styles */
-        .sidebar-icon {
-            width: 1.5rem;
-            height: 1.5rem;
+        .icon-wrapper svg {
+            color: var(--brand-purple);
         }
-        .service-card {
-            border: 1px solid #e5e7eb;
-            transition: all 0.2s ease-in-out;
+        .roadmap-line {
+            height: 4px;
+            background: linear-gradient(90deg, var(--brand-purple) 0%, var(--brand-orange) 100%);
+            position: absolute;
+            top: 12px;
+            left: 0;
+            right: 0;
+            z-index: -1;
         }
-        .service-card:hover, .service-card.active {
-            border-color: #6d28d9;
-            background-color: #f5f3ff;
-            color: #6d28d9;
-            cursor: pointer;
+        .roadmap-item .dot {
+            height: 28px;
+            width: 28px;
+            border-radius: 9999px;
+            background-color: var(--bg-dark);
+            border: 4px solid var(--brand-orange);
+            transition: all 0.3s ease;
         }
-        .service-card.active {
-             box-shadow: 0 0 0 2px #6d28d9;
+        .roadmap-item:hover .dot {
+            transform: scale(1.1);
+            border-color: var(--brand-purple);
         }
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        
+        @keyframes hero-glow {
+            0% { filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.4)); }
+            50% { filter: drop-shadow(0 0 25px rgba(249, 115, 22, 0.6)); }
+            100% { filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.4)); }
         }
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+        .hero-mascot {
+            animation: hero-glow 3s infinite ease-in-out;
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="text-gray-200">
 
     <!-- Header -->
-    <header class="header-bg shadow-md sticky top-0 z-50">
+    <header class="header-bg shadow-lg sticky top-0 z-50 border-b border-gray-800">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center">
-                <span class="text-3xl font-black brand-purple">$PUMPIN</span>
+                <span class="text-3xl font-black brand-gradient-text">$Pumpin</span>
             </div>
-            <div class="hidden md:flex items-center space-x-8 font-medium text-gray-600">
-                <a href="#home" class="nav-link hover:text-purple-700 transition duration-300" data-page="home-page">Home</a>
-                <a href="#dashboard" class="nav-link hover:text-purple-700 transition duration-300" data-page="dashboard-page">Dashboard</a>
-                <a href="#services" class="nav-link hover:text-purple-700 transition duration-300" data-page="home-page">Services</a>
-                <a href="#how-it-works" class="nav-link hover:text-purple-700 transition duration-300" data-page="home-page">How It Works</a>
-                <a href="#about" class="nav-link hover:text-purple-700 transition duration-300" data-page="home-page">About</a>
+            <div class="hidden md:flex items-center space-x-8 font-medium text-gray-400">
+                <a href="#hero" class="hover:text-white transition duration-300">Home</a>
+                <a href="#story" class="hover:text-white transition duration-300">Legend</a>
+                <a href="#solana-advantage" class="hover:text-white transition duration-300">Advantage</a>
+                <a href="#the-pump-station" class="hover:text-white transition duration-300">Pump Station</a>
+                <a href="#pumpinomics" class="hover:text-white transition duration-300">Pumpinomics</a>
+                <a href="#roadmap" class="hover:text-white transition duration-300">Roadmap</a>
             </div>
-            <button id="connect-wallet-header-btn" class="button-purple font-bold py-2 px-6 rounded-lg hover:shadow-lg transition duration-300 transform hover:scale-105">
-                Connect Wallet
-            </button>
+            <a href="dashboard.html" class="button-primary py-2 px-6 rounded-lg">
+                Launch App
+            </a>
         </nav>
     </header>
 
-    <!-- Main Content Container for SPA - Takes remaining height -->
+    <!-- Main Content Container -->
     <div id="app-container" class="flex-1">
-        <!-- Home Page Content -->
-        <main id="home-page" class="container mx-auto px-6 py-12 page-section">
+        <main id="home-page">
             
             <!-- Hero Section -->
-            <section class="text-center mb-20">
-                <h1 class="text-4xl md:text-6xl font-black text-gray-900 leading-tight">Amplify Your Social Presence</h1>
-                <p class="text-lg md:text-xl mt-4 max-w-3xl mx-auto text-gray-600">The first SMM  powered entirely by crypto. Use <span class="font-bold brand-purple">$PUMPIN</span> to buy followers, likes, views, and more.</p>
-                <div class="mt-8">
-                    <a href="#order-section" class="button-purple font-bold py-4 px-10 rounded-lg text-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
-                        Get Started
-                    </a>
+            <section id="hero" class="text-center py-24 bg-grid-pattern">
+                <div class="container mx-auto px-6">
+                    <h1 class="text-4xl md:text-7xl font-black text-white leading-tight">
+                        $PUMPIN – The Official <span class="brand-gradient-text">Currency of Shilling</span>
+                    </h1>
+                    <p class="text-lg md:text-2xl mt-6 max-w-3xl mx-auto text-gray-300 font-medium">
+                        Post it. Shill it. Pump it.
+                    </p>
+                    <p class="text-md md:text-lg mt-2 max-w-3xl mx-auto text-gray-400">
+                        Powered by Peter Pumpin – Solana’s patron saint of degens.
+                    </p>
+                    <div class="mt-10 flex justify-center items-center space-x-4">
+                        <a href="https://raydium.io/" target="_blank" class="button-primary py-4 px-10 rounded-lg text-lg">
+                            Buy $PUMPIN
+                        </a>
+                        <a href="#community-hub" class="button-secondary py-4 px-10 rounded-lg text-lg">
+                            Join Community
+                        </a>
+                    </div>
+                    <div class="mt-16 hero-mascot">
+                         <div class="mt-16 hero-mascot">
+                        <!-- Peter Pumpin Mascot Image -->
+                        <img src="https://updatedcardscript.standard.us-east-1.oortstorages.com/peterpumpin.png" alt="Peter Pumpin Mascot" class="h-56 mx-auto">
+                    </div>
                 </div>
             </section>
 
-            <!-- How It Works Section -->
-            <section id="how-it-works" class="mb-20">
-                <h2 class="text-4xl font-black text-center mb-10">How $PUMPIN Works</h2>
+            <!-- Story Section -->
+            <section id="story" class="container mx-auto px-6 py-24">
+                <h2 class="text-4xl font-black text-center mb-4">The Legend of <span class="brand-gradient-text">Peter Pumpin</span></h2>
+                <p class="text-center text-lg text-gray-400 max-w-3xl mx-auto mb-16">This isn’t just a coin. It’s a movement. A chaotic-good, relentlessly positive swarm of degens who refuse to fade quietly.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Step 1 -->
-                    <div class="step-card">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-purple-100 mx-auto mb-4">
-                            <span class="text-2xl font-bold brand-purple">01</span>
+                    <div class="feature-card text-center">
+                        <div class="icon-wrapper mx-auto">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-2">Get a Wallet</h3>
-                        <p class="text-gray-600">To get started, you'll need a crypto wallet like MetaMask or Trust Wallet. This is your gateway to the decentralized web and how you'll interact with our platform.</p>
+                        <p class="text-lg text-gray-300">“Long before the world was flooded with botted hype and fake engagement, there was one degen brave enough to flex for the culture.”</p>
                     </div>
-                    <!-- Step 2 -->
-                    <div class="step-card">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-purple-100 mx-auto mb-4">
-                            <span class="text-2xl font-bold brand-purple">02</span>
+                    <div class="feature-card text-center">
+                        <div class="icon-wrapper mx-auto">
+                           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-2">Buy $PUMPIN</h3>
-                        <p class="text-gray-600">Next, acquire $PUMPIN tokens, the native currency of $PUMPIN. All services are paid for in $PUMPIN, ensuring fast, secure, and private transactions.</p>
-                        <a href="#buy-$PUMPIN" class="mt-4 inline-block font-bold brand-purple hover:underline">Buy $PUMPIN Now</a>
+                        <p class="text-lg text-gray-300">“Peter Pumpin – a chiseled, jack-o’-lantern-headed legend – rose from the Solana soil to become the patron saint of shilling.”</p>
                     </div>
-                    <!-- Step 3 -->
-                    <div class="step-card">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-purple-100 mx-auto mb-4">
-                            <span class="text-2xl font-bold brand-purple">03</span>
+                    <div class="feature-card text-center">
+                        <div class="icon-wrapper mx-auto">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-2">Create an Order</h3>
-                        <p class="text-gray-600">Once you have $PUMPIN in your wallet, you're ready to go. Simply choose a service, fill out the order form, and confirm the transaction directly from your wallet.</p>
-                        <a href="#order-section" class="mt-4 inline-block font-bold brand-purple hover:underline">Place an Order</a>
+                        <p class="text-lg text-gray-300">“He exists to arm the community with a single mission: Pump your posts. Pump your bags. Pump your vibes.”</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Buy $PUMPIN Section -->
-            <section id="buy-$PUMPIN" class="mb-20 bg-white rounded-2xl p-8 shadow-lg text-center">
-                <h2 class="text-3xl font-bold mb-4">Get Your $PUMPIN Tokens</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto mb-6">You can purchase $PUMPIN tokens on Uniswap, a leading decentralized exchange. Use the contract address below to import the token into your wallet or the exchange.</p>
-                <div class="mb-6">
-                    <p class="text-sm text-gray-500">Official $PUMPIN Contract Address:</p>
-                    <div class="flex justify-center items-center mt-2">
-                        <input id="contract-address" type="text" readonly class="bg-gray-100 text-center p-2 rounded-l-md w-full max-w-md" value="0x1234567890abcdef1234567890abcdef12345678">
-                        <button id="copy-btn" class="bg-gray-200 hover:bg-gray-300 p-2 rounded-r-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                        </button>
+            <!-- Solana Advantage Section -->
+            <section id="solana-advantage" class="bg-gray-900 py-24">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-4xl font-black text-center mb-4">Built Where <span class="brand-gradient-text">Degens Thrive</span></h2>
+                    <p class="text-center text-lg text-gray-400 max-w-3xl mx-auto mb-16">We planted our seeds on Solana because no other chain can handle the pump. Why crawl when you can pump at 50,000 TPS?</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="feature-card">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01"></path></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2 text-white">Micro-fees</h3>
+                            <p class="text-gray-400">Pump for fractions of a cent – no more wasting gas on engagement.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2 text-white">Fast AF</h3>
+                            <p class="text-gray-400">Like, retweet, and pay providers at the literal speed of light.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7.014A8.003 8.003 0 0117.657 18.657z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1014.12 11.88m-4.242 4.242z"></path></svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2 text-white">Degen Paradise</h3>
+                            <p class="text-gray-400">Solana is the undisputed meme capital of the world. We're home.</p>
+                        </div>
                     </div>
                 </div>
-                <a href="#" target="_blank" class="button-purple font-bold py-3 px-8 rounded-lg text-lg hover:shadow-lg transition duration-300">
-                    Buy on Uniswap
-                </a>
             </section>
-
-            <!-- About Section -->
-            <section id="about" class="mb-20 text-center">
-                <h2 class="text-4xl font-black mb-4">About $PUMPIN</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">$PUMPIN is revolutionizing the SMM industry by leveraging the power of cryptocurrency. Our mission is to provide a transparent, secure, and efficient platform for individuals and businesses to enhance their social media presence. By using our native token, $PUMPIN, we eliminate the need for traditional payment methods, offering our users greater privacy and lower fees.</p>
-            </section>
-
-            <!-- Wallet & Order Section (on Home Page) -->
-            <section id="order-section" class="mb-20">
-                <div class="bg-white max-w-5xl mx-auto rounded-2xl p-8 shadow-lg">
-                    <h2 class="text-3xl font-bold text-center mb-6">Create Your Order</h2>
-                    <!-- Wallet Display -->
-                    <div id="wallet-display-home" class="mb-6 p-4 rounded-lg bg-gray-100 text-center">
-                        <p class="text-gray-500">Please connect your wallet to place an order.</p>
+            
+            <!-- The Pump Station Section -->
+            <section id="the-pump-station" class="container mx-auto px-6 py-24">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h2 class="text-4xl font-black mb-4">Introducing: <span class="brand-gradient-text">The Pump Station</span></h2>
+                        <p class="text-xl text-gray-300 mb-6">A decentralized marketplace where posts become pumpable assets. You bring the post. We bring the pump.</p>
+                        <ul class="space-y-4 text-lg text-gray-400">
+                            <li class="flex items-start"><span class="text-purple-400 mr-3 mt-1">✓</span><div><span class="font-bold text-white">Buyers:</span> Pay in $PUMPIN to get real, human-powered likes, retweets, or comments.</div></li>
+                            <li class="flex items-start"><span class="text-purple-400 mr-3 mt-1">✓</span><div><span class="font-bold text-white">Providers:</span> Earn $PUMPIN by completing tasks on the platform, creating a Web3 side-hustle.</div></li>
+                            <li class="flex items-start"><span class="text-purple-400 mr-3 mt-1">✓</span><div><span class="font-bold text-white">Trustless Escrow:</span> Payments are held in a smart contract and released automatically upon verification.</div></li>
+                        </ul>
+                        <a href="dashboard.html" class="inline-block mt-8 button-primary py-3 px-8 rounded-lg text-lg">
+                            Launch The Pump Station
+                        </a>
                     </div>
+                    <div class="bg-gray-900 p-8 rounded-lg shadow-xl border border-gray-800">
+                        <p class="text-center font-bold text-white mb-6">Crowdsourced Engagement Engine</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4"><div class="bg-purple-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">1</div><span class="bg-gray-800 p-3 rounded-lg w-full">Submit Post URL & Pay</span></div>
+                            <div class="flex justify-center"><svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg></div>
+                            <div class="flex items-center space-x-4"><div class="bg-purple-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">2</div><span class="bg-gray-800 p-3 rounded-lg w-full">Funds Held in Escrow</span></div>
+                            <div class="flex justify-center"><svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg></div>
+                            <div class="flex items-center space-x-4"><div class="bg-purple-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">3</div><span class="bg-gray-800 p-3 rounded-lg w-full">Providers Complete Tasks</span></div>
+                            <div class="flex justify-center"><svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg></div>
+                            <div class="flex items-center space-x-4"><div class="bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">✓</div><span class="bg-gray-800 p-3 rounded-lg w-full">Metrics Pumped & Payout</span></div>
+                        </div>
+                    </div>
+                 </div>
+            </section>
 
-                    <!-- Order Form -->
-                    <form id="order-form-home" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div>
-                            <label for="service-id-home" class="block text-sm font-medium text-gray-700">Service ID</label>
-                            <input type="text" id="service-id-home" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" placeholder="e.g., 101">
+            <!-- Pumpinomics Section -->
+            <section id="pumpinomics" class="bg-gray-900 py-24">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-4xl font-black text-center mb-4">No Rugs. <span class="brand-gradient-text">Only Pump.</span></h2>
+                    <p class="text-center text-lg text-gray-400 max-w-3xl mx-auto mb-16">$PUMPIN was designed to put the community first, always. Even the founders ape in like everyone else.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="feature-card text-center">
+                            <h3 class="text-2xl font-bold mb-2 text-white">0% Taxes</h3>
+                            <p class="text-gray-400">This is non-negotiable. Trade freely and keep what you earn.</p>
                         </div>
-                        <div>
-                            <label for="link-home" class="block text-sm font-medium text-gray-700">Link</label>
-                            <input type="url" id="link-home" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" placeholder="https://instagram.com/p/..." required>
+                        <div class="feature-card text-center">
+                            <h3 class="text-2xl font-bold mb-2 text-white">LP Burned & Renounced</h3>
+                            <p class="text-gray-400">100% of initial LP is burned. The contract is renounced. No rugs, no excuses.</p>
                         </div>
-                        <div>
-                            <label for="quantity-home" class="block text-sm font-medium text-gray-700">Quantity</label>
-                            <input type="number" id="quantity-home" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500" placeholder="1000" min="1" required>
+                        <div class="feature-card text-center">
+                            <h3 class="text-2xl font-bold mb-2 text-white">Transparent Allocation</h3>
+                            <p class="text-gray-400">40% Airdrop, 40% Liquidity, 20% Treasury. No team allocation.</p>
                         </div>
-                        <div class="md:col-span-3 text-center">
-                            <p class="text-lg font-semibold">Total Cost: <span id="total-cost-home" class="brand-purple">0 $PUMPIN</span></p>
-                            <button type="submit" class="mt-4 w-full md:w-auto button-purple font-bold py-3 px-12 rounded-lg text-lg hover:shadow-lg transition duration-300" disabled>Place Order</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </section>
 
-            <!-- Services Section (on Home Page) -->
-            <section id="services" class="mb-20">
-                <h2 class="text-4xl font-black text-center mb-10">Our Services</h2>
-                <!-- Tabs -->
-                <div class="border-b border-gray-200 mb-6">
-                    <nav class="-mb-px flex justify-center space-x-8" aria-label="Tabs">
-                        <button class="tab-btn tab-active" data-target="instagram">Instagram</button>
-                        <button class="tab-btn tab-inactive" data-target="youtube">YouTube</button>
-                        <button class="tab-btn tab-inactive" data-target="tiktok">TikTok</button>
-                        <button class="tab-btn tab-inactive" data-target="twitter">Twitter</button>
-                    </nav>
+            <!-- Roadmap Section -->
+            <section id="roadmap" class="container mx-auto px-6 py-24">
+                <h2 class="text-4xl font-black text-center mb-16">Where We’re <span class="brand-gradient-text">Pumpin’ To</span></h2>
+                <div class="relative">
+                    <div class="roadmap-line"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                        <div class="roadmap-item">
+                            <div class="dot mx-auto mb-4"></div>
+                            <h4 class="font-bold text-lg text-white">Phase 1: The Great Pumpening</h4>
+                            <p class="text-sm text-gray-400 mt-2">Token launch, LP burn, viral airdrop & meme storm.</p>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="dot mx-auto mb-4"></div>
+                            <h4 class="font-bold text-lg text-white">Phase 2: The Utility Drop</h4>
+                            <p class="text-sm text-gray-400 mt-2">Launch "The Pump Station" MVP to create the eternal pump flywheel.</p>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="dot mx-auto mb-4"></div>
+                            <h4 class="font-bold text-lg text-white">Phase 3: Beyond the Meme</h4>
+                            <p class="text-sm text-gray-400 mt-2">Scale the provider network, partnerships, and new rewarding features.</p>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Tab Content -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div id="instagram" class="tab-content">
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <thead class="text-xs text-gray-700 uppercase table-header">
-                                <tr><th scope="col" class="px-6 py-3">ID</th><th scope="col" class="px-6 py-3">Service</th><th scope="col" class="px-6 py-3">Price per 1000 ($PUMPIN)</th><th scope="col" class="px-6 py-3">Min/Max</th><th scope="col" class="px-6 py-3"></th></tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b"><td class="px-6 py-4">101</td><td class="px-6 py-4 font-medium text-gray-900">Instagram Followers [HQ]</td><td class="px-6 py-4">50</td><td class="px-6 py-4">100 / 10,000</td><td class="px-6 py-4"><button class="order-btn button-purple text-xs font-bold py-1 px-3 rounded-md" data-id="101" data-price="50">Order</button></td></tr>
-                                <tr class="bg-gray-50 border-b"><td class="px-6 py-4">102</td><td class="px-6 py-4 font-medium text-gray-900">Instagram Likes [Real]</td><td class="px-6 py-4">5</td><td class="px-6 py-4">50 / 5,000</td><td class="px-6 py-4"><button class="order-btn button-purple text-xs font-bold py-1 px-3 rounded-md" data-id="102" data-price="5">Order</button></td></tr>
-                                <tr class="bg-white border-b"><td class="px-6 py-4">103</td><td class="px-6 py-4 font-medium text-gray-900">Instagram Views [Fast]</td><td class="px-6 py-4">0.1</td><td class="px-6 py-4">100 / 1,000,000</td><td class="px-6 py-4"><button class="order-btn button-purple text-xs font-bold py-1 px-3 rounded-md" data-id="103" data-price="0.1">Order</button></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="youtube" class="tab-content hidden">
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <thead class="text-xs text-gray-700 uppercase table-header">
-                                <tr><th scope="col" class="px-6 py-3">ID</th><th scope="col" class="px-6 py-3">Service</th><th scope="col" class="px-6 py-3">Price per 1000 ($PUMPIN)</th><th scope="col" class="px-6 py-3">Min/Max</th><th scope="col" class="px-6 py-3"></th></tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b"><td class="px-6 py-4">201</td><td class="px-6 py-4 font-medium text-gray-900">YouTube Subscribers</td><td class="px-6 py-4">250</td><td class="px-6 py-4">50 / 1,000</td><td class="px-6 py-4"><button class="order-btn button-purple text-xs font-bold py-1 px-3 rounded-md" data-id="201" data-price="250">Order</button></td></tr>
-                                <tr class="bg-gray-50 border-b"><td class="px-6 py-4">202</td><td class="px-6 py-4 font-medium text-gray-900">YouTube Views [HQ]</td><td class="px-6 py-4">2</td><td class="px-6 py-4">1000 / 500,000</td><td class="px-6 py-4"><button class="order-btn button-purple text-xs font-bold py-1 px-3 rounded-md" data-id="202" data-price="2">Order</button></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="tiktok" class="tab-content hidden"><p class="p-6 text-center text-gray-500">TikTok services coming soon.</p></div>
-                    <div id="twitter" class="tab-content hidden"><p class="p-6 text-center text-gray-500">Twitter services coming soon.</p></div>
+            </section>
+            
+            <!-- Community Hub Section -->
+            <section id="community-hub" class="bg-gray-900 py-24">
+                <div class="container mx-auto px-6 text-center">
+                     <h2 class="text-4xl md:text-5xl font-black text-white leading-tight mb-4">Join the <span class="brand-gradient-text">Pumpin’ Legion</span></h2>
+                     <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-400">The community is the beating heart of the project. We don’t follow. We lead. And we do it loud.</p>
+                     <div class="mt-8 flex justify-center space-x-4">
+                         <a href="https://twitter.com" target="_blank" class="bg-gray-800 hover:bg-gray-700 p-4 rounded-full transition duration-300" title="Twitter (for the memes)">
+                             <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                         </a>
+                         <a href="https://t.me" target="_blank" class="bg-gray-800 hover:bg-gray-700 p-4 rounded-full transition duration-300" title="Telegram (for the alpha)">
+                             <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M11.94 1.76l-.49 4.35 15.65-7.79zm-10.74 3.79l-1.46 7.42 16.51-14.73zM5.7 19.34l.11-.47 1.83-8.91 16.51-14.73zM21.5 21.99l-2.07-.6-1.07-5.5-16.11 14.88 4.7 1.63z" fill="currentColor"/></svg>
+                         </a>
+                         <a href="https://discord.com" target="_blank" class="bg-gray-800 hover:bg-gray-700 p-4 rounded-full transition duration-300" title="Discord (for the chaos)">
+                             <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20.3,3.5C18.8,3 17.2,3 17.2,3L16.8,3.6C18.4,4.2 19.6,5.2 20.2,6.4C19.1,5.8 17.8,5.3 16.4,5C16.4,5 16.3,4.9 16.2,4.9C14.2,4.3 12.1,4.3 10.1,4.9C10,4.9 9.9,5 9.9,5C8.5,5.3 7.2,5.8 6.1,6.4C6.7,5.2 7.9,4.2 9.5,3.6L9.1,3S7.5,3 6,3.5C3.1,4.9 1.7,8.2 2.2,11.5C3.3,15.2 6.4,17.6 10.1,17.8C10.1,17.8 10.3,17.5 10.5,17.3C9.2,16.8 8.2,16 7.6,15C7.6,15 7.6,15 7.6,14.9C10.2,16.1 13.1,16.1 15.7,14.9C15.7,15 15.7,15 15.7,15C15.1,16 14.1,16.8 12.8,17.3C13,17.5 13.2,17.8 13.2,17.8C16.9,17.6 20,15.2 21.1,11.5C21.6,8.2 20.2,4.9 20.3,3.5M10,12.8C9,12.8 8.2,12 8.2,11S9,9.2 10,9.2S11.8,10 11.8,11S11,12.8 10,12.8M14.7,12.8C13.7,12.8 12.9,12 12.9,11S13.7,9.2 14.7,9.2S16.5,10 16.5,11S15.7,12.8 14.7,12.8Z" fill="currentColor"/></svg>
+                         </a>
+                     </div>
+                     <div class="mt-8 text-center text-gray-400">
+                        <p class="font-bold text-lg text-orange-400">Stay Pumpin’ – Forever.</p>
+                        <p class="mt-4 text-sm font-mono bg-gray-800 inline-block px-4 py-2 rounded-md">
+                            <span class="font-bold text-gray-500">CA:</span> B9A8D7E6C5F4A3B2C1D0E9F8A7B6C5D4E3F2A1B0
+                        </p>
+                     </div>
                 </div>
             </section>
         </main>
-
-        <!-- Dashboard Page Content -->
-        <div id="dashboard-page" class="hidden page-section flex-1">
-            <div class="flex h-full"> <!-- This div now correctly wraps sidebar and main content for flex layout -->
-                <!-- Sidebar -->
-                <aside class="w-64 flex-shrink-0 bg-white shadow-md hidden md:block">
-                    <div class="p-6">
-                        <span class="text-3xl font-black brand-purple">$PUMPIN</span>
-                    </div>
-                    <nav class="mt-6">
-                        <a href="#dashboard" class="sidebar-nav-link flex items-center px-6 py-3 text-purple-700 bg-purple-50" data-page="dashboard-page">
-                            <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                            <span class="mx-4 font-semibold">New Order</span>
-                        </a>
-                        <a href="#" class="sidebar-nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100" data-page="orders-page">
-                            <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                            <span class="mx-4">Orders</span>
-                        </a>
-                        <a href="#buy-$PUMPIN" class="sidebar-nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100" data-page="home-page">
-                            <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            <span class="mx-4">Buy $PUMPIN</span>
-                        </a>
-                        <a href="#services" class="sidebar-nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100" data-page="home-page">
-                            <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            <span class="mx-4">Services</span>
-                        </a>
-                    </nav>
-                </aside>
-
-                <!-- Dashboard Main Content Area -->
-                <main class="flex-1 flex flex-col overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-                    <div class="container mx-auto">
-                        <!-- Social Network Selection -->
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Choose a Social Network</h3>
-                        <div id="service-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-                            <!-- Service cards will be injected here -->
-                        </div>
-
-                        <!-- Order Section -->
-                        <div class="bg-white rounded-lg shadow-lg p-6">
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                <!-- Left: Service List & Order Form -->
-                                <div>
-                                    <h4 id="service-list-title" class="text-xl font-bold mb-4">Instagram Services</h4>
-                                    <div class="h-64 overflow-y-auto border rounded-lg mb-6 no-scrollbar">
-                                        <table class="w-full text-sm text-left text-gray-500">
-                                            <thead class="text-xs text-gray-700 uppercase table-header sticky top-0">
-                                                <tr>
-                                                    <th scope="col" class="px-4 py-3">ID</th>
-                                                    <th scope="col" class="px-4 py-3">Service</th>
-                                                    <th scope="col" class="px-4 py-3">Price / 1k</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="service-table-body">
-                                                <!-- Service rows will be injected here -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <form id="order-form-dashboard">
-                                        <div class="mb-4">
-                                            <label for="service-id-dashboard" class="block text-sm font-medium text-gray-700">Service ID</label>
-                                            <input type="text" id="service-id-dashboard" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" readonly>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label for="link-dashboard" class="block text-sm font-medium text-gray-700">Link</label>
-                                            <input type="url" id="link-dashboard" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="https://..." required>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label for="quantity-dashboard" class="block text-sm font-medium text-gray-700">Quantity</label>
-                                            <input type="number" id="quantity-dashboard" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="1000" min="1" required>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- Right: Order Details & Submission -->
-                                <div class="bg-gray-50 p-6 rounded-lg">
-                                    <h4 class="text-xl font-bold mb-4">Order Details</h4>
-                                    <div id="order-details-dashboard">
-                                        <p class="text-gray-500 text-center">Select a service from the list.</p>
-                                    </div>
-                                    <div class="mt-6 border-t pt-4">
-                                        <p class="text-lg font-semibold flex justify-between">Total Cost: <span id="total-cost-dashboard" class="brand-purple">0 $PUMPIN</span></p>
-                                        <button type="submit" form="order-form-dashboard" class="mt-4 w-full button-purple font-bold py-3 rounded-lg text-lg" disabled>Place Order</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        </div>
-        <!-- Placeholder for other future pages -->
-        <div id="orders-page" class="flex-1 flex flex-col overflow-hidden hidden page-section">
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-                <div class="container mx-auto bg-white p-8 rounded-lg shadow-lg text-center">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Your Orders</h2>
-                    <p class="text-gray-600">This section will display your past and current orders.</p>
-                    <p class="text-gray-500 mt-4">Coming soon!</p>
-                </div>
-            </main>
-        </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-white mt-20 py-8 border-t">
+    <footer class="bg-black py-8 border-t border-gray-900">
         <div class="container mx-auto px-6 text-center text-gray-500">
-            <p>&copy; 2025 by $PUMPIN. All rights reserved.</p>
+            <p class="font-bold">Powered by Solana. Fueled by Degens.</p>
+            <p class="mt-2 text-xs">&copy; 2025 by $Pumpin. This is a meme coin with real utility, but it’s still crypto – do your own research.</p>
         </div>
     </footer>
-
-    <!-- Custom Modal Structure -->
-    <div id="custom-modal" class="fixed inset-0 hidden flex items-center justify-center modal-backdrop">
-        <div class="bg-white p-8 rounded-xl shadow-2xl relative modal-content">
-            <h3 id="modal-title" class="text-2xl font-bold mb-4 text-gray-900"></h3>
-            <p id="modal-message" class="text-gray-700 mb-6"></p>
-            <button id="modal-close-btn" class="button-purple font-bold py-2 px-6 rounded-lg hover:shadow-lg transition duration-300">
-                Close
-            </button>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Data ---
-            const serviceData = {
-                instagram: { name: 'Instagram', icon: '<svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.2,5.2 0 0,1 16.2,21.4H7.8C4.6,21.4 2,18.8 2,15.6V7.8A5.2,5.2 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" fill="currentColor"/></svg>', services: [
-                    {id: 101, name: 'Followers [HQ]', price: 50, min: 100, max: 10000, desc: 'High-quality followers delivered within 24 hours.'},
-                    {id: 102, name: 'Likes [Real]', price: 5, min: 50, max: 5000, desc: 'Likes from real-looking profiles.'},
-                    {id: 103, name: 'Views [Fast]', price: 0.1, min: 100, max: 1000000, desc: 'Instant video views.'},
-                ]},
-                youtube: { name: 'YouTube', icon: '<svg viewBox="0 0 24 24"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.08C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.73,18.78 17.92,18.84C17.13,18.91 16.44,18.94 15.84,18.94L15,19C12.81,19 11.2,18.84 10.17,18.56C9.27,18.31 8.69,17.73 8.44,16.83C8.31,16.36 8.22,15.73 8.16,14.92C8.09,14.13 8.06,13.44 8.06,12.84L8,12C8,9.81 8.16,8.2 8.44,7.17C8.69,6.27 9.27,5.69 10.17,5.44C11.2,5.16 12.81,5 15,5L15.84,5.06C16.44,5.06 17.13,5.09 17.92,5.16C18.73,5.22 19.36,5.31 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z" fill="currentColor"/></svg>', services: [
-                    {id: 201, name: 'Subscribers', price: 250, min: 50, max: 1000, desc: 'Permanent YouTube subscribers.'},
-                    {id: 202, name: 'Views [HQ]', price: 2, min: 1000, max: 500000, desc: 'High-retention views.'},
-                ]},
-                twitter: { name: 'X (Twitter)', icon: '<svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>', services: [
-                    {id: 301, name: 'Followers', price: 40, min: 100, max: 10000, desc: 'Real-looking Twitter followers.'},
-                ]},
-                discord: { name: 'Discord', icon: '<svg viewBox="0 0 24 24"><path d="M20.3,3.5C18.8,3 17.2,3 17.2,3L16.8,3.6C18.4,4.2 19.6,5.2 20.2,6.4C19.1,5.8 17.8,5.3 16.4,5C16.4,5 16.3,4.9 16.2,4.9C14.2,4.3 12.1,4.3 10.1,4.9C10,4.9 9.9,5 9.9,5C8.5,5.3 7.2,5.8 6.1,6.4C6.7,5.2 7.9,4.2 9.5,3.6L9.1,3S7.5,3 6,3.5C3.1,4.9 1.7,8.2 2.2,11.5C3.3,15.2 6.4,17.6 10.1,17.8C10.1,17.8 10.3,17.5 10.5,17.3C9.2,16.8 8.2,16 7.6,15C7.6,15 7.6,15 7.6,14.9C10.2,16.1 13.1,16.1 15.7,14.9C15.7,15 15.7,15 15.7,15C15.1,16 14.1,16.8 12.8,17.3C13,17.5 13.2,17.8 13.2,17.8C16.9,17.6 20,15.2 21.1,11.5C21.6,8.2 20.2,4.9 20.3,3.5M10,12.8C9,12.8 8.2,12 8.2,11S9,9.2 10,9.2S11.8,10 11.8,11S11,12.8 10,12.8M14.7,12.8C13.7,12.8 12.9,12 12.9,11S13.7,9.2 14.7,9.2S16.5,10 16.5,11S15.7,12.8 14.7,12.8Z" fill="currentColor"/></svg>', services: [
-                    {id: 401, name: 'Server Members', price: 30, min: 50, max: 2000, desc: 'Online/Offline Discord members.'},
-                ]},
-                coinmarketcap: { name: 'CoinMarketCap', icon: '<svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M14.6,15.1L12,17.3L9.4,15.1L8,16.5L12,20.5L16,16.5L14.6,15.1M12,3.5L16,7.5L14.6,8.9L12,6.7L9.4,8.9L8,7.5L12,3.5M12,8.2L17,13.2L15.6,14.6L12,11L8.4,14.6L7,13.2L12,8.2Z" fill="currentColor"/></svg>', services: [
-                    {id: 501, name: 'Watchlist Adds', price: 27.5, min: 1000, max: 250000, desc: 'Add your token to thousands of watchlists.'},
-                ]},
-                opensea: { name: 'OpenSea', icon: '<svg viewBox="0 0 24 24"><path d="M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10s10-4.48 10-10S17.52,2 12,2z M12,19c-3.86,0-7-3.14-7-7s3.14-7 7-7s7,3.14 7,7S15.86,19 12,19z M12,7c-2.76,0-5,2.24-5,5s2.24,5 5,5s5-2.24 5-5S14.76,7 12,7z M12,15c-1.66,0-3-1.34-3-3s1.34-3 3-3s3,1.34 3,3S13.66,15 12,15z" fill="currentColor"/></svg>', services: [
-                    {id: 601, name: 'Favorites', price: 15, min: 100, max: 5000, desc: 'Increase favorites on your NFT collection.'},
-                ]},
-                rarible: { name: 'Rarible', icon: '<svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5L12 2zm0 17.5L4 15V9l8 4v4.5zM20 9l-8 4v4.5l8-4V9z" fill="currentColor"/></svg>', services: [
-                    {id: 701, name: 'Likes', price: 10, min: 100, max: 10000, desc: 'Get likes on your Rarible NFTs.'},
-                ]},
-                coinsniper: { name: 'CoinSniper', icon: '<svg viewBox="0 0 24 24"><path d="M11.5,1C12.55,1.63 13.37,2.45 14,3.5C14.63,2.45 15.45,1.63 16.5,1C15.45,0.37 14.63,0.55 14,0C13.37,0.55 12.55,0.37 11.5,1M19.09,3.5L21.92,4.94L20.5,7.75L17.65,6.33L19.09,3.5M4.91,3.5L7.35,6.33L4.5,7.75L3.08,4.94L4.91,3.5M14,6.5A0.5,0.5 0 0,1 14.5,7A0.5,0.5 0 0,1 14,7.5A0.5,0.5 0 0,1 13.5,7A0.5,0.5 0 0,1 14,6.5M12.83,8.5L14,9.67L12,11.67L10,9.67L11.17,8.5L12,9.33L12.83,8.5M14,13V22A2,2 0 0,1 12,24A2,2 0 0,1 10,22V13L12,15L14,13Z" fill="currentColor"/></svg>', services: [
-                    {id: 801, name: 'Upvotes', price: 100, min: 100, max: 5000, desc: '$PUMPIN your token on CoinSniper.'},
-                ]},
-            };
-
-            // --- DOM Elements (General) ---
-            const connectWalletHeaderBtn = document.getElementById('connect-wallet-header-btn');
-            const walletDisplayHeader = document.getElementById('wallet-display'); // Wallet display in header
-            const customModal = document.getElementById('custom-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalMessage = document.getElementById('modal-message');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
-            const pageSections = document.querySelectorAll('.page-section');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sidebarNavLinks = document.querySelectorAll('.sidebar-nav-link');
-
-
-            // --- DOM Elements (Home Page Specific) ---
-            const walletDisplayHome = document.getElementById('wallet-display-home');
-            const orderFormHome = document.getElementById('order-form-home');
-            const serviceIdInputHome = document.getElementById('service-id-home');
-            const linkInputHome = document.getElementById('link-home');
-            const quantityInputHome = document.getElementById('quantity-home');
-            const totalCostElHome = document.getElementById('total-cost-home');
-            const placeOrderBtnHome = orderFormHome.querySelector('button[type="submit"]');
-            const copyBtn = document.getElementById('copy-btn');
-            const contractAddressInput = document.getElementById('contract-address');
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
-            const orderBtnsHome = document.querySelectorAll('.order-btn'); // Order buttons on home page service table
-
-
-            // --- DOM Elements (Dashboard Page Specific) ---
-            const serviceGrid = document.getElementById('service-grid');
-            const serviceTableBody = document.getElementById('service-table-body');
-            const serviceListTitle = document.getElementById('service-list-title');
-            const orderDetailsDashboard = document.getElementById('order-details-dashboard');
-            const serviceIdInputDashboard = document.getElementById('service-id-dashboard');
-            const quantityInputDashboard = document.getElementById('quantity-dashboard');
-            const linkInputDashboard = document.getElementById('link-dashboard');
-            const totalCostElDashboard = document.getElementById('total-cost-dashboard');
-            const placeOrderBtnDashboard = document.querySelector('#order-form-dashboard button[type="submit"]');
-
-
-            let account = null;
-            let activeCategory = 'instagram'; // Default active category for dashboard service selection
-
-            // --- SPA Navigation Functions ---
-            /**
-             * Shows a specific page section and hides all others.
-             * @param {string} pageId - The ID of the page section to show (e.g., 'home-page', 'dashboard-page').
-             */
-            const showPage = (pageId) => {
-                pageSections.forEach(section => {
-                    section.classList.add('hidden'); // Hide all sections initially
-                });
-
-                const targetSection = document.getElementById(pageId);
-                if (targetSection) {
-                    targetSection.classList.remove('hidden');
-                }
-
-                // Update URL hash for direct linking (optional but good practice for SPAs)
-                history.pushState(null, '', `#${pageId.replace('-page', '')}`);
-
-                // Re-render dashboard components if switching to dashboard page
-                if (pageId === 'dashboard-page') {
-                    renderServiceGrid();
-                    renderServiceTable(activeCategory);
-                    // Reset dashboard order form
-                    document.getElementById('order-form-dashboard').reset();
-                    serviceIdInputDashboard.value = '';
-                    orderDetailsDashboard.innerHTML = '<p class="text-gray-500 text-center">Select a service from the list.</p>';
-                    totalCostElDashboard.textContent = '0 $PUMPIN';
-                }
-            };
-
-            // --- Modal Functions ---
-            /**
-             * Displays a custom modal with a given title and message.
-             * @param {string} title - The title of the modal.
-             * @param {string} message - The message content of the modal.
-             */
-            const showModal = (title, message) => {
-                modalTitle.textContent = title;
-                modalMessage.textContent = message;
-                customModal.classList.remove('hidden');
-            };
-
-            /**
-             * Hides the custom modal.
-             */
-            const hideModal = () => {
-                customModal.classList.add('hidden');
-            };
-
-            // Close modal when close button is clicked
-            modalCloseBtn.addEventListener('click', hideModal);
-            // Close modal when clicking outside the content (on the backdrop)
-            customModal.addEventListener('click', (e) => {
-                if (e.target === customModal) {
-                    hideModal();
-                }
-            });
-
-            // --- Wallet UI Functions ---
-            /**
-             * Updates the wallet display and button text based on connection status across all relevant UIs.
-             * @param {string|null} connectedAccount - The connected Ethereum account address, or null if not connected.
-             */
-            const updateWalletUI = (connectedAccount) => {
-                account = connectedAccount;
-                const shortAddress = account ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}` : '';
-
-                // Update Header Wallet Display
-                if (account) {
-                    walletDisplayHeader.innerHTML = `
-                        <p class="text-sm text-gray-500">Connected: ${shortAddress}</p>
-                        <p class="font-semibold brand-purple">1,500 $PUMPIN</p>
-                    `;
-                    connectWalletHeaderBtn.textContent = 'Connected';
-                } else {
-                    walletDisplayHeader.innerHTML = `<p class="font-semibold brand-purple">0.00 $PUMPIN</p>`;
-                    connectWalletHeaderBtn.textContent = 'Connect Wallet';
-                }
-
-                // Update Home Page Order Section Wallet Display
-                if (walletDisplayHome) { // Check if element exists (it's on the home page)
-                    if (account) {
-                        walletDisplayHome.innerHTML = `
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <p class="text-sm text-gray-500">Connected Wallet</p>
-                                    <p class="font-semibold text-gray-800">${shortAddress}</p>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-500">Balance</p>
-                                    <p class="font-semibold brand-purple">1,500 $PUMPIN</p>
-                                </div>
-                            </div>
-                        `;
-                        placeOrderBtnHome.disabled = false;
-                        placeOrderBtnDashboard.disabled = false; // Also enable dashboard order button
-                    } else {
-                        walletDisplayHome.innerHTML = `<p class="text-gray-500">Please connect your wallet to place an order.</p>`;
-                        placeOrderBtnHome.disabled = true;
-                        placeOrderBtnDashboard.disabled = true; // Also disable dashboard order button
-                    }
-                }
-            };
-            
-            // --- Wallet Connection Logic ---
-            /**
-             * Attempts to connect to the user's Ethereum wallet (e.g., MetaMask).
-             */
-            const connectWallet = async () => {
-                if (window.ethereum) {
-                    try {
-                        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                        updateWalletUI(accounts[0]);
-                        showModal('Wallet Connected', `Successfully connected to wallet: ${accounts[0].substring(0, 6)}...${accounts[0].substring(accounts[0].length - 4)}`);
-                    } catch (error) {
-                        console.error("Wallet connection error:", error);
-                        updateWalletUI(null);
-                        if (error.code === 4001) {
-                            showModal('Connection Rejected', 'You rejected the wallet connection request. Please try again to connect.');
-                        } else {
-                            showModal('Connection Error', 'An error occurred while connecting to your wallet. Please ensure MetaMask is unlocked and try again.');
-                        }
-                    }
-                } else {
-                    showModal('MetaMask Not Found', 'MetaMask is not installed. Please install it to use this feature. You can find it at metamask.io');
-                }
-            };
-            
-            connectWalletHeaderBtn.addEventListener('click', connectWallet);
-
-            // --- Copy to Clipboard (Home Page Specific) ---
-            if (copyBtn) { // Ensure element exists before attaching listener
-                copyBtn.addEventListener('click', () => {
-                    contractAddressInput.select();
-                    document.execCommand('copy');
-                    // Visual feedback: change icon to a checkmark temporarily
-                    copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>`;
-                    setTimeout(() => {
-                        // Revert icon back to copy
-                        copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>`;
-                    }, 2000); // 2 seconds
-                });
-            }
-
-            // --- Home Page Tab Functionality ---
-            tabBtns.forEach(button => {
-                button.addEventListener('click', () => {
-                    tabBtns.forEach(btn => btn.classList.replace('tab-active', 'tab-inactive'));
-                    button.classList.replace('tab-inactive', 'tab-active');
-                    tabContents.forEach(content => {
-                        content.id === button.dataset.target ? content.classList.remove('hidden') : content.classList.add('hidden');
-                    });
-                });
-            });
-
-            // --- Home Page Order Form Logic ---
-            /**
-             * Calculates and displays the total cost of the order on the home page.
-             */
-            const calculateCostHome = () => {
-                const serviceId = serviceIdInputHome.value;
-                const quantity = parseInt(quantityInputHome.value) || 0;
-                // Services object for home page tabs is different from dashboard's serviceData
-                const homePageServices = {};
-                document.querySelectorAll('#services .order-btn').forEach(btn => {
-                    homePageServices[btn.dataset.id] = { price: parseFloat(btn.dataset.price) };
-                });
-                const service = homePageServices[serviceId];
-
-                if (service && quantity > 0) {
-                    const cost = (quantity / 1000) * service.price;
-                    totalCostElHome.textContent = `${cost.toFixed(4)} $PUMPIN`;
-                } else {
-                    totalCostElHome.textContent = '0 $PUMPIN';
-                }
-            };
-
-            // Event listeners for "Order" buttons in the home page services table
-            orderBtnsHome.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    serviceIdInputHome.value = btn.dataset.id; // Pre-fill service ID
-                    // Scroll to order section on home page
-                    document.getElementById('order-section').scrollIntoView({ behavior: 'smooth' });
-                    calculateCostHome(); // Recalculate cost
-                });
-            });
-
-            // Event listeners for input changes to dynamically calculate cost on home page
-            serviceIdInputHome.addEventListener('input', calculateCostHome);
-            quantityInputHome.addEventListener('input', calculateCostHome);
-
-            // Handle home page order form submission
-            if (orderFormHome) {
-                orderFormHome.addEventListener('submit', (e) => {
-                    e.preventDefault();
-
-                    if(!account) {
-                        showModal('Wallet Not Connected', 'Please connect your crypto wallet before placing an order.');
-                        return;
-                    }
-
-                    const serviceId = serviceIdInputHome.value;
-                    const link = linkInputHome.value;
-                    const quantity = parseInt(quantityInputHome.value);
-                    const homePageServices = {};
-                    document.querySelectorAll('#services .order-btn').forEach(btn => {
-                        homePageServices[btn.dataset.id] = { price: parseFloat(btn.dataset.price) };
-                    });
-                    const selectedService = homePageServices[serviceId];
-
-                    if (!serviceId || !link || !quantity || quantity <= 0 || !selectedService) {
-                        showModal('Invalid Order', 'Please fill in all order details correctly, including a valid service ID, link, and a quantity greater than zero.');
-                        return;
-                    }
-
-                    const totalCost = totalCostElHome.textContent;
-                    showModal('Order Placed!', `Your order for Service ID: ${serviceId}, Quantity: ${quantity} at Link: ${link} has been placed. Total Cost: ${totalCost}. This is a demo transaction.`);
-                    
-                    orderFormHome.reset();
-                    calculateCostHome();
-                });
-            }
-
-            // --- Dashboard Render Functions ---
-            /**
-             * Renders the social network selection grid for the dashboard.
-             */
-            const renderServiceGrid = () => {
-                if (!serviceGrid) return; // Ensure element exists
-                serviceGrid.innerHTML = '';
-                for (const key in serviceData) {
-                    const category = serviceData[key];
-                    const card = document.createElement('div');
-                    card.className = `service-card flex items-center p-4 rounded-lg ${key === activeCategory ? 'active' : ''}`;
-                    card.dataset.category = key;
-                    card.innerHTML = `<div class="w-6 h-6 mr-3">${category.icon}</div><span class="font-semibold">${category.name}</span>`;
-                    serviceGrid.appendChild(card);
-                }
-            };
-
-            /**
-             * Renders the service table for the currently active category on the dashboard.
-             * @param {string} categoryKey - The key of the active service category.
-             */
-            const renderServiceTable = (categoryKey) => {
-                if (!serviceTableBody || !serviceListTitle) return; // Ensure elements exist
-                const category = serviceData[categoryKey];
-                serviceListTitle.textContent = `${category.name} Services`;
-                serviceTableBody.innerHTML = '';
-                if (category && category.services.length > 0) {
-                    category.services.forEach(service => {
-                        const row = document.createElement('tr');
-                        row.className = 'bg-white border-b hover:bg-gray-50 cursor-pointer';
-                        row.dataset.serviceId = service.id;
-                        row.innerHTML = `
-                            <td class="px-4 py-3 font-medium text-gray-900">${service.id}</td>
-                            <td class="px-4 py-3">${service.name}</td>
-                            <td class="px-4 py-3 font-semibold brand-purple">${service.price}</td>
-                        `;
-                        serviceTableBody.appendChild(row);
-                    });
-                } else {
-                    serviceTableBody.innerHTML = '<tr><td colspan="3" class="text-center p-4 text-gray-500">No services available for this category.</td></tr>';
-                }
-            };
-            
-            /**
-             * Renders the details for a selected service in the dashboard's order details .
-             * @param {number} serviceId - The ID of the selected service.
-             */
-            const renderOrderDetailsDashboard = (serviceId) => {
-                if (!serviceIdInputDashboard || !orderDetailsDashboard) return; // Ensure elements exist
-                const category = serviceData[activeCategory];
-                const service = category.services.find(s => s.id == serviceId);
-                if (service) {
-                    serviceIdInputDashboard.value = service.id;
-                    orderDetailsDashboard.innerHTML = `
-                        <h5 class="font-bold text-lg mb-2">${service.name}</h5>
-                        <p class="text-sm text-gray-600 mb-4">${service.desc}</p>
-                        <div class="text-sm">
-                            <p class="flex justify-between"><span>Price per 1000:</span> <span class="font-semibold">${service.price} $PUMPIN</span></p>
-                            <p class="flex justify-between"><span>Min Order:</span> <span class="font-semibold">${service.min.toLocaleString()}</span></p>
-                            <p class="flex justify-between"><span>Max Order:</span> <span class="font-semibold">${service.max.toLocaleString()}</span></p>
-                        </div>
-                    `;
-                    calculateCostDashboard();
-                }
-            };
-
-            /**
-             * Calculates and displays the total cost of the order on the dashboard.
-             */
-            const calculateCostDashboard = () => {
-                if (!serviceIdInputDashboard || !quantityInputDashboard || !totalCostElDashboard) return; // Ensure elements exist
-                const serviceId = serviceIdInputDashboard.value;
-                const quantity = parseInt(quantityInputDashboard.value) || 0;
-                const service = serviceData[activeCategory]?.services.find(s => s.id == serviceId);
-
-                if (service && quantity > 0) {
-                    const cost = (quantity / 1000) * service.price;
-                    totalCostElDashboard.textContent = `${cost.toFixed(4)} $PUMPIN`;
-                } else {
-                    totalCostElDashboard.textContent = '0 $PUMPIN';
-                }
-            };
-
-            // --- Dashboard Event Listeners ---
-            if (serviceGrid) { // Ensure element exists (only on dashboard page)
-                serviceGrid.addEventListener('click', (e) => {
-                    const card = e.target.closest('.service-card');
-                    if (card) {
-                        activeCategory = card.dataset.category;
-                        renderServiceGrid(); // Re-render to update active state
-                        renderServiceTable(activeCategory);
-                        orderDetailsDashboard.innerHTML = '<p class="text-gray-500 text-center">Select a service from the list.</p>';
-                        serviceIdInputDashboard.value = '';
-                        calculateCostDashboard();
-                    }
-                });
-            }
-
-            if (serviceTableBody) { // Ensure element exists
-                serviceTableBody.addEventListener('click', (e) => {
-                    const row = e.target.closest('tr');
-                    if (row) {
-                        renderOrderDetailsDashboard(row.dataset.serviceId);
-                    }
-                });
-            }
-
-            if (quantityInputDashboard) { // Ensure element exists
-                quantityInputDashboard.addEventListener('input', calculateCostDashboard);
-            }
-
-            // Handle dashboard order form submission
-            if (document.getElementById('order-form-dashboard')) {
-                document.getElementById('order-form-dashboard').addEventListener('submit', (e) => {
-                    e.preventDefault();
-
-                    if(!account) {
-                        showModal('Wallet Not Connected', 'Please connect your crypto wallet before placing an order.');
-                        return;
-                    }
-
-                    const serviceId = serviceIdInputDashboard.value;
-                    const link = linkInputDashboard.value;
-                    const quantity = parseInt(quantityInputDashboard.value);
-                    const selectedService = serviceData[activeCategory]?.services.find(s => s.id == serviceId);
-
-                    if (!serviceId || !link || !quantity || quantity <= 0 || !selectedService) {
-                        showModal('Invalid Order', 'Please fill in all order details correctly, including a valid service ID, link, and a quantity greater than zero.');
-                        return;
-                    }
-
-                    const totalCost = totalCostElDashboard.textContent;
-                    showModal('Order Placed!', `Your order for Service ID: ${serviceId}, Quantity: ${quantity} at Link: ${link} has been placed. Total Cost: ${totalCost}. This is a demo transaction.`);
-                    
-                    document.getElementById('order-form-dashboard').reset();
-                    serviceIdInputDashboard.value = '';
-                    orderDetailsDashboard.innerHTML = '<p class="text-gray-500 text-center">Select a service from the list.</p>';
-                    calculateCostDashboard();
-                });
-            }
-
-
-            // --- Global Navigation Event Listeners ---
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetPageId = link.dataset.page;
-                    showPage(targetPageId);
-
-                    // If it's a scroll-to-section link on the home page, scroll after showing page
-                    if (targetPageId === 'home-page' && link.getAttribute('href').startsWith('#')) {
-                        const sectionId = link.getAttribute('href').substring(1);
-                        const section = document.getElementById(sectionId);
-                        if (section) {
-                            section.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }
-                });
-            });
-
-            sidebarNavLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetPageId = link.dataset.page;
-                    showPage(targetPageId);
-
-                    // Update active class for sidebar links
-                    sidebarNavLinks.forEach(btn => btn.classList.remove('text-purple-700', 'bg-purple-50'));
-                    link.classList.add('text-purple-700', 'bg-purple-50');
-
-                    // If it's a scroll-to-section link on the home page, scroll after showing page
-                    if (targetPageId === 'home-page' && link.getAttribute('href').startsWith('#')) {
-                        const sectionId = link.getAttribute('href').substring(1);
-                        const section = document.getElementById(sectionId);
-                        if (section) {
-                            section.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }
-                });
-            });
-
-
-            // --- Initial Load ---
-            // Determine initial page based on URL hash or default to home
-            const initialHash = window.location.hash.substring(1);
-            if (initialHash && document.getElementById(`${initialHash}-page`)) {
-                showPage(`${initialHash}-page`);
-            } else {
-                showPage('home-page'); // Default to home page
-            }
-            
-            // Check initial wallet connection
-            const checkInitialConnection = async () => {
-                 if (window.ethereum) {
-                    try {
-                        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-                        if (accounts.length > 0) {
-                            updateWalletUI(accounts[0]);
-                        }
-                    } catch (error) {
-                        console.error("Error checking initial wallet connection:", error);
-                        updateWalletUI(null);
-                    }
-                 }
-            };
-            checkInitialConnection();
-        });
-    </script>
 
 </body>
 </html>
