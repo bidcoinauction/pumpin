@@ -169,6 +169,10 @@
             height: 2rem;
             color: var(--brand-dark-brown);
         }
+        /* Fix for sticky header anchor link overlap */
+        section[id] {
+            scroll-margin-top: 80px; /* Adjust this value based on your header height */
+        }
 
     </style>
 </head>
@@ -397,4 +401,3 @@
 </div>
 </body>
 </html>
-
