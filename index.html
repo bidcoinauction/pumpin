@@ -3,82 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$Pumpin - The Official Currency of Shilling</title>
+    <title>$PUMPIN - The Algorithm Obeys the Pump</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=EB+Garamond:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brand-orange: #f97316;
-            --bg-parchment: #fdf6e3;
-            --text-dark-brown: #4e423a;
-            --text-light-brown: #6d5f54;
-            --border-scroll: #c8a077;
-            --bg-stone: #d1c7b8;
+            /* New color palette based on user input */
+            --brand-dark-brown: #563808; /* From user --color-1 */
+            --brand-parchment: #fef9cc; /* From user --color-2 */
+            --brand-orange: #f97316; /* Unchanged accent */
+
+            /* Derived colors for a cohesive theme */
+            --text-light-brown: #8a6d3b;
+            --border-scroll: #a88a53;
+            --bg-stone: #e8e1c2;
+            --shadow-dark: #a88a53;
         }
         html {
             scroll-behavior: smooth;
         }
         body {
             font-family: 'EB Garamond', serif;
-            background-color: var(--bg-parchment);
-            color: var(--text-dark-brown);
-            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d1c7b8" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            background-color: #3b2a05; /* Darker, derived background for contrast */
+            color: var(--brand-dark-brown);
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23563808" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+        .scroll-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background-color: var(--brand-parchment);
+            border: 10px solid;
+            border-image-slice: 1;
+            border-width: 10px;
+            border-image-source: linear-gradient(to bottom, #8c6d3a, #563808);
+            box-shadow: 0 0 40px rgba(0,0,0,0.7);
         }
         .heading-font {
             font-family: 'MedievalSharp', cursive;
+            text-shadow: 1px 1px 0px var(--brand-parchment), 2px 2px 0px var(--shadow-dark);
         }
         .brand-text {
             color: var(--brand-orange);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
-        .button-primary {
-            background-color: var(--text-dark-brown);
-            color: var(--bg-parchment);
+        .header-bg {
+            background-color: rgba(254, 249, 204, 0.8); /* Updated to new parchment color */
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--border-scroll);
+        }
+        .button-primary, .button-secondary {
             font-family: 'MedievalSharp', cursive;
             font-size: 1.1rem;
-            border: 2px solid #3a312b;
             border-radius: 0.25rem;
-            box-shadow: inset 0 -2px 0 #2c2521;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-in-out;
+            padding: 0.75rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-style: solid;
+            border-width: 2px 2px 4px 2px;
+            transform: translateY(0);
+        }
+        .button-primary {
+            background-color: var(--brand-dark-brown);
+            color: var(--brand-parchment);
+            border-color: #3b2a05;
         }
         .button-primary:hover {
-            background-color: #3a312b;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background-color: #3b2a05;
+        }
+         .button-primary:active {
+            transform: translateY(1px);
+            box-shadow: none;
         }
         .button-secondary {
             background-color: transparent;
-            color: var(--text-dark-brown);
-            font-family: 'MedievalSharp', cursive;
-            font-size: 1.1rem;
-            border: 2px solid var(--text-dark-brown);
-            border-radius: 0.25rem;
-            transition: all 0.2s ease;
+            color: var(--brand-dark-brown);
+            border-color: var(--brand-dark-brown);
         }
         .button-secondary:hover {
-            background-color: var(--text-dark-brown);
-            color: var(--bg-parchment);
+            background-color: var(--brand-dark-brown);
+            color: var(--brand-parchment);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
         .stone-card {
             background-color: var(--bg-stone);
             border-radius: 0.5rem;
             padding: 2rem;
-            border: 1px solid #b9ad9e;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255,255,255,0.3);
+            border: 1px solid var(--border-scroll);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.3);
             text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .section-divider {
-            height: 20px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20"><path d="M0 10 Q 25 20, 50 10 T 100 10" stroke="%23c8a077" fill="none" stroke-width="2"/></svg>');
+            height: 50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0 10 C 20 0, 40 0, 50 10 S 80 20, 100 10" stroke="%23a88a53" fill="none" stroke-width="2" stroke-linecap="round"/><path d="M0 12 C 20 2, 40 2, 50 12 S 80 22, 100 12" stroke="%23563808" fill="none" stroke-width="1" stroke-linecap="round"/></svg>');
             background-repeat: repeat-x;
             background-position: center;
-            margin: 3rem 0;
+            background-size: contain;
+            margin: 2rem 0;
         }
         .roadmap-line {
             height: 3px;
-            background-image: linear-gradient(to right, #a58a67, #7d654c);
+            background-image: linear-gradient(to right, #a88a53, #563808);
             position: absolute;
             top: 18px;
             left: 5%;
@@ -90,221 +127,276 @@
             width: 40px;
             border-radius: 9999px;
             background-color: var(--brand-orange);
-            border: 4px solid var(--text-dark-brown);
+            border: 4px solid var(--brand-dark-brown);
             box-shadow: 0 0 10px rgba(249, 115, 22, 0.7);
         }
+        .icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.75rem;
+        }
+        .social-icon-wrapper {
+            background-color: var(--bg-stone);
+            border: 2px solid var(--brand-dark-brown);
+            border-radius: 0.25rem;
+            padding: 0.75rem;
+            transition: all 0.2s ease-in-out;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .social-icon-wrapper:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+            background-color: var(--brand-dark-brown);
+        }
+        .social-icon-wrapper:hover svg {
+            color: var(--brand-parchment);
+        }
+        .tithe-tablet {
+            background-color: #d7cea8; /* Derived from new stone color */
+            border: 2px solid var(--brand-dark-brown);
+            border-radius: .5rem;
+            padding: 1.5rem;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.3);
+        }
+        .tithe-step {
+            background-color: var(--brand-parchment);
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--border-scroll);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .tithe-arrow {
+            width: 2rem;
+            height: 2rem;
+            color: var(--brand-dark-brown);
+        }
+
     </style>
 </head>
 <body>
-
+<div class="scroll-container">
     <!-- Header -->
     <header class="header-bg shadow-lg sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="flex items-center">
+            <a href="#hero" class="flex items-center">
                 <span class="text-4xl heading-font brand-text">$Pumpin</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-6 font-medium text-text-light-brown">
+                <a href="#legend" class="hover:brand-text transition duration-300">The Legend</a>
+                <a href="#forge" class="hover:brand-text transition duration-300">The Forge</a>
+                <a href="#formula" class="hover:brand-text transition duration-300">The Formula</a>
+                <a href="#pumpinomics" class="hover:brand-text transition duration-300">Pumpinomics</a>
+                <a href="#roadmap" class="hover:brand-text transition duration-300">The Path</a>
             </div>
-            <div class="hidden md:flex items-center space-x-8 font-medium text-lg text-light-brown">
-                <a href="#problem" class="hover:text-dark-brown transition duration-300">The Problem</a>
-                <a href="#solution" class="hover:text-dark-brown transition duration-300">The Fix</a>
-                <a href="#how-it-works" class="hover:text-dark-brown transition duration-300">The Loop</a>
-                <a href="#pumpinomics" class="hover:text-dark-brown transition duration-300">Pumpinomics</a>
-                <a href="#roadmap" class="hover:text-dark-brown transition duration-300">The Path</a>
-            </div>
-            <a href="dashboard.html" class="button-primary py-2 px-6">
-                Launch App
+            <a href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=YOUR_TOKEN_ADDRESS_HERE" target="_blank" class="button-primary py-2 px-6 hidden md:flex">
+                Buy Now
             </a>
         </nav>
     </header>
 
     <!-- Main Content Container -->
-    <div id="app-container" class="flex-1">
-        <main id="home-page">
-            
-            <!-- Hero Section -->
-            <section id="hero" class="text-center py-24">
-                <div class="container mx-auto px-6">
-                    <h1 class="text-5xl md:text-8xl heading-font text-dark-brown leading-tight">
-                        $PUMPIN
-                    </h1>
-                    <p class="text-2xl md:text-4xl mt-4 heading-font brand-text">
-                        The Official Currency of Shilling
-                    </p>
-                    <p class="text-xl md:text-2xl mt-6 max-w-3xl mx-auto text-light-brown font-medium">
-                        Post it. Shill it. Pump it. Peter Pumpin cranks the algo so your bags get louder.
-                    </p>
-                    <div class="mt-10 flex justify-center items-center space-x-4">
-                        <a href="https://raydium.io/" target="_blank" class="button-primary py-4 px-10 text-xl">
-                            Buy $PUMPIN
-                        </a>
-                        <a href="#community-hub" class="button-secondary py-4 px-10 text-xl">
-                            Join the Legion
-                        </a>
+    <main>
+        
+        <!-- Hero Section -->
+        <section id="hero" class="text-center py-20 md:py-24 px-4">
+            <div class="container mx-auto">
+                <h1 class="text-5xl md:text-8xl heading-font text-brand-dark-brown leading-tight">
+                    The Algorithm Obeys the Pump.
+                </h1>
+                <p class="text-xl md:text-2xl mt-6 max-w-3xl mx-auto text-text-light-brown font-semibold">
+                    Post it. Shill it. Pump it. The creed of Peter Pumpin, Solana’s patron saint of authentic hype.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=YOUR_TOKEN_ADDRESS_HERE" target="_blank" class="button-primary text-xl">
+                        <!-- Anvil/Forge Icon -->
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.92,13.63,19,12.24V11a1,1,0,0,0-1-1H16.32l.64-1.68,2.82-1.2L21.06,2.8l-4.24,4.24-.68.67.39,1H13.82l-3-3L12.2,4.29,10.79,2.88,6.55,7.12l1.41,1.41,1.42-1.42,3,3H9.41l.39-1-.68-.67L4.94,2.8,3.66,7.12l2.82,1.2.64,1.68H5a1,1,0,0,0-1,1v1.24L1.08,13.63a1,1,0,0,0-.4,1.5l1,1.74a1,1,0,0,0,.87.5H4v4a1,1,0,0,0,1,1H19a1,1,0,0,0,1-1V17.37h1.45a1,1,0,0,0,.87-.5l1-1.74A1,1,0,0,0,21.92,13.63ZM18,20H6V17.37H18Z"/></svg>
+                        To the Forge
+                    </a>
+                    <a href="#community" class="button-secondary text-xl">
+                        <!-- Helmet Icon -->
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.32l.95-1.33A8,8,0,1,1,12,4V2M22,12a10,10,0,0,0-10-10v2a8,8,0,0,1,6.79,12.32l.95,1.33A9.89,9.89,0,0,0,22,12ZM11,13.42V22h2V13.42a3,3,0,0,0,1-2.42,3,3,0,0,0-6,0,3,3,0,0,0,1,2.42Z"/></svg>
+                        Join the Legion
+                    </a>
+                </div>
+                <div class="mt-16">
+                    <img src="https://updatedcardscript.standard.us-east-1.oortstorages.com/peterpumpin.png" alt="Peter Pumpin Mascot" class="h-56 mx-auto" style="filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.3));">
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- The Legend Section -->
+        <section id="legend" class="container mx-auto px-6 py-12">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-5xl heading-font text-center mb-4 text-brand-dark-brown">The Legend of the Pump</h2>
+                <p class="text-xl text-text-light-brown leading-relaxed">
+                    The feed is a graveyard, littered with the ghosts of fire posts that died with two likes. For too long, the algorithm has demanded tribute in bots and boosted posts, only to give back silence. But the blockchain prophesized a hero. A chiseled legend with diamond hands and a jack-o'-lantern glare, forged in the fires of the Solana mainnet. His name is Peter Pumpin. He rose not to offer empty hype, but to arm the legion with the tools to create their own. His mission is simple and absolute:
+                </p>
+                <p class="text-2xl heading-font brand-text mt-6">
+                    Pump your posts. Pump your bags. Pump the culture.
+                </p>
+                <p class="text-xl text-text-light-brown mt-4">
+                    $PUMPIN isn't a token. It's proof that real hype, powered by a real community, is the only alpha that matters.
+                </p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- The Forge of Influence Section -->
+        <section id="forge" class="py-12" style="background-color: var(--bg-stone);">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-5xl heading-font mb-4 text-brand-dark-brown">The Forge of Influence</h2>
+                <h3 class="text-3xl heading-font brand-text mb-6">Where Will Becomes Reality</h3>
+                <p class="max-w-4xl mx-auto text-xl text-text-light-brown mb-6">
+                    Here, at the heart of the movement, lies The Forge of Influence—a sacred crucible where desire is hammered into destiny. This is no mere marketplace; it is where the Legion focuses its will, and The Arcanum channels it into pure, undeniable amplification.
+                </p>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 text-left text-lg text-text-light-brown mb-6">
+                    <p><strong class="text-brand-dark-brown">The Offering:</strong> An Acolyte of the Pump (a Buyer) approaches the Forge with a tribute of $PUMPIN and a link to the scripture they wish to amplify.</p>
+                    <p><strong class="text-brand-dark-brown">The Invocation:</strong> The Arcanum—the great and unknowable mechanism at the project's core—accepts the offering. It consults the celestial rhythm of the markets and unleashes the Legion to perform the sacred task.</p>
+                </div>
+                 <p class="text-xl text-text-light-brown mt-6 max-w-4xl mx-auto">
+                    <strong class="text-brand-dark-brown">The Witness:</strong> The Arcanum itself bears witness to every act of amplification. Once the prophecy is fulfilled, it releases the promised bounty from an astral escrow to the faithful providers.
+                 </p>
+                <p class="text-2xl heading-font brand-text mt-8">You bring the scripture. We bring the sermon.</p>
+                <a href="#" class="inline-block mt-6 button-primary py-3 px-8 text-lg">
+                    The Great Work Begins Soon
+                </a>
+            </div>
+        </section>
+        
+        <div class="section-divider"></div>
+
+        <!-- The Alchemist's Formula Section -->
+        <section id="formula" class="py-12 px-4">
+            <div class="container mx-auto max-w-4xl text-center">
+                <h2 class="text-5xl heading-font mb-4 text-brand-dark-brown">The Alchemist's Formula</h2>
+                <h3 class="text-3xl heading-font brand-text mb-12">The Prime Mover of Value</h3>
+                
+                <!-- The Scrying Mirror -->
+                <div class="mb-12">
+                    <h4 class="text-4xl heading-font mb-4 text-brand-dark-brown">The Scrying Mirror</h4>
+                    <p class="text-lg text-text-light-brown mb-8 max-w-3xl mx-auto">The Arcanum cannot be deceived. To ensure a tribute is true and just, it gazes into the Scrying Mirror—an oracle bound by covenant to the markets. The Mirror reflects the pure essence (the USD value) of $PUMPIN at the very moment of sacrifice, allowing The Arcanum to decree the proper offering.</p>
+                    
+                    <div class="tithe-tablet max-w-md mx-auto">
+                        <div class="flex flex-col items-center space-y-4 font-mono text-brand-dark-brown text-lg">
+                            <div class="tithe-step w-full">A Tithe of Influence is Decreed (e.g., worth $1.00)</div>
+                            <svg class="tithe-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4v13.07l-4.5-4.5L5,14l7,7,7-7-1.5-1.43L13,17.07V4H11Z"/></svg>
+                            <div class="tithe-step w-full">The Scrying Mirror Reveals the Token's Essence (e.g., $0.01)</div>
+                            <svg class="tithe-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4v13.07l-4.5-4.5L5,14l7,7,7-7-1.5-1.43L13,17.07V4H11Z"/></svg>
+                            <div class="tithe-step w-full">The Arcanum Decrees the Offering: <span class="font-bold brand-text">100 $PUMPIN</span></div>
+                        </div>
                     </div>
-                    <div class="mt-16">
-                        <img src="https://updatedcardscript.standard.us-east-1.oortstorages.com/peterpumpin.png" alt="Peter Pumpin Mascot" class="h-56 mx-auto" style="filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.3));">
+                    <p class="mt-6 text-xl heading-font text-brand-dark-brown">The Inscription: As the token's essence grows stronger, a smaller tithe is required.</p>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <!-- Lock in Growth -->
+                <div class="my-12">
+                     <div class="stone-card p-8">
+                        <h4 class="text-4xl heading-font mb-4 text-brand-dark-brown">Lock In Tomorrow's Growth Today</h4>
+                        <p class="text-lg text-text-light-brown leading-relaxed">
+                            Remember when 10,000 Bitcoin bought two pizzas? Today, it's worth a fortune. We apply the same principle to our services. By acquiring $PUMPIN early, you are lowering your future cost for all your social media needs.
+                        </p>
+                        <p class="text-2xl heading-font brand-text mt-6">
+                            The earlier you hold, the cheaper your growth.
+                        </p>
+                        <p class="text-lg text-text-light-brown mt-4">
+                            This isn't just a token; it's a bet on the future of your own influence. As the Legion grows, your early position becomes exponentially more powerful. Agencies and brands will want to acquire tokens ahead of campaigns. You get upfront liquidity, they get a future discount. Everybody pumps.
+                        </p>
                     </div>
                 </div>
-            </section>
 
-            <div class="section-divider"></div>
-
-            <!-- The Problem Section -->
-            <section id="problem" class="container mx-auto px-6 py-12">
-                <h2 class="text-5xl heading-font text-center mb-4">The Problem:</h2>
-                <h3 class="text-4xl heading-font text-center brand-text mb-12">Bots. Dead Feeds. Fake Clout.</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="stone-card">
-                        <h3 class="text-3xl heading-font mb-2">Money Burned</h3>
-                        <p class="text-light-brown text-lg">Paying “influencers” who influence no one.</p>
-                    </div>
-                    <div class="stone-card">
-                        <h3 class="text-3xl heading-font mb-2">Engagement Graveyard</h3>
-                        <p class="text-light-brown text-lg">Looks lit on paper. Feels like a morgue.</p>
-                    </div>
-                    <div class="stone-card">
-                        <h3 class="text-3xl heading-font mb-2">No Receipts</h3>
-                        <p class="text-light-brown text-lg">No proof you moved the needle. Just vibes and cope.</p>
+                <div class="section-divider"></div>
+                
+                <!-- War Council -->
+                <div class="mt-12">
+                    <h4 class="text-4xl heading-font mt-12 mb-4 text-brand-dark-brown">The Legion's War Council</h4>
+                    <p class="text-lg text-text-light-brown mb-8 max-w-3xl mx-auto">To hold $PUMPIN is to be a soldier. To stake it is to become a commander. The Legion's War Council is not a group chat; it is an Inner Sanctum, guarded by rites of passage. An automated guardian verifies your worthiness at the digital gates and grants passage to the private halls of strategy.</p>
+                    <div class="space-y-4">
+                        <div class="stone-card text-left p-4"><h5 class="text-2xl heading-font text-brand-dark-brown">Tier 1: Legionary</h5><p class="text-text-light-brown">Access general DAO chat and vote on community polls.</p></div>
+                        <div class="stone-card text-left p-4"><h5 class="text-2xl heading-font text-brand-dark-brown">Tier 2: Centurion</h5><p class="text-text-light-brown">Join the Power User channel, gain higher voting weight, and get early access to new features.</p></div>
+                        <div class="stone-card text-left p-4"><h5 class="text-2xl heading-font text-brand-dark-brown">Tier 3: Praetorian Guard</h5><p class="text-text-light-brown">Enter the Council, submit formal governance proposals, and join strategy calls with the founders.</p></div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <div class="section-divider"></div>
-
-            <!-- The Solution Section -->
-            <section id="solution" class="py-12 bg-parchment-darker">
-                <div class="container mx-auto px-6 text-center">
-                    <h2 class="text-5xl heading-font mb-4">The Fix:</h2>
-                    <h3 class="text-4xl heading-font brand-text mb-6">$PUMPIN = The Algo Cheat Code</h3>
-                    <p class="max-w-3xl mx-auto text-xl text-light-brown mb-8">
-                        Pay in $PUMPIN. Hit “Pump” and watch your post go turbo. Our algo handles the heavy lifting. No managers. No middlemen. Just chaos.
-                    </p>
+        <div class="section-divider"></div>
+        
+        <!-- Pumpinomics Section -->
+        <section id="pumpinomics" class="py-12" style="background-color: var(--bg-stone);">
+             <div class="container mx-auto px-6">
+                <h2 class="text-5xl heading-font text-center mb-4 text-brand-dark-brown">Pumpinomics</h2>
+                <h3 class="text-3xl heading-font text-center brand-text mb-12">No Rugs. Just Gains.</h3>
+                <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="stone-card"><h4 class="text-2xl heading-font text-brand-dark-brown">0% TAX</h4><p class="text-text-light-brown">Trade freely. What you buy is what you get.</p></div>
+                    <div class="stone-card"><h4 class="text-2xl heading-font text-brand-dark-brown">LP BURNED</h4><p class="text-text-light-brown">The bridge is burned. There is no retreat.</p></div>
+                    <div class="stone-card"><h4 class="text-2xl heading-font text-brand-dark-brown">RENOUNCED</h4><p class="text-text-light-brown">No one can change the code or mint new tokens.</p></div>
+                    <div class="stone-card"><h4 class="text-2xl heading-font text-brand-dark-brown">FAIR LAUNCH</h4><p class="text-text-light-brown">No team allocation. No private sale. The pump is for all.</p></div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <div class="section-divider"></div>
-            
-            <!-- How It Works Section -->
-            <section id="how-it-works" class="container mx-auto px-6 py-12">
-                 <h2 class="text-5xl heading-font text-center mb-12">The <span class="brand-text">Pump Station Loop</span></h2>
-                <div class="max-w-2xl mx-auto text-center">
-                    <p class="text-4xl heading-font text-dark-brown">Post → Pump → Boost → Repeat</p>
-                    <ul class="space-y-4 text-xl text-light-brown mt-8 text-left inline-block">
-                        <li class="flex items-center"><span class="text-dark-brown mr-4 text-2xl heading-font">✓</span><strong>Drop a tweet.</strong></li>
-                        <li class="flex items-center"><span class="text-dark-brown mr-4 text-2xl heading-font">✓</span><strong>Feed the station.</strong></li>
-                        <li class="flex items-center"><span class="text-dark-brown mr-4 text-2xl heading-font">✓</span><strong>Algo goes brrr.</strong></li>
-                        <li class="flex items-center"><span class="text-dark-brown mr-4 text-2xl heading-font">✓</span><strong>Enjoy the pump.</strong></li>
-                    </ul>
-                     <p class="text-xl text-light-brown mt-8">No cap. No rug. No middlemen. Just pure velocity.</p>
-                    <div class="text-center">
-                        <a href="dashboard.html" class="inline-block mt-8 button-primary py-3 px-8 text-lg">
-                            Launch The Pump Station
-                        </a>
+        <div class="section-divider"></div>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="container mx-auto px-6 py-12">
+            <h2 class="text-5xl heading-font text-center mb-24 text-brand-dark-brown">The <span class="brand-text">Path to Victory</span></h2>
+            <div class="relative">
+                <div class="roadmap-line"></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="roadmap-item">
+                        <div class="dot mx-auto mb-4"></div>
+                        <h4 class="heading-font text-2xl text-brand-dark-brown">Phase 1: The Great Pumpening</h4>
+                        <p class="text-text-light-brown mt-2">The genesis. A viral token launch, the sacred LP burn, and a meme storm that shakes the feed.</p>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="dot mx-auto mb-4"></div>
+                        <h4 class="heading-font text-2xl text-brand-dark-brown">Phase 2: The Utility Unleashed</h4>
+                        <p class="text-text-light-brown mt-2">The launch of The Forge of Influence. The promise becomes reality. The "Eternal Pump" flywheel begins to spin.</p>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="dot mx-auto mb-4"></div>
+                        <h4 class="heading-font text-2xl text-brand-dark-brown">Phase 3: The Eternal Pump</h4>
+                        <p class="text-text-light-brown mt-2">Full-scale expansion. Onboard creators, partner with meme lords, and reward the legion for spreading the pump.</p>
                     </div>
                 </div>
-            </section>
-
-            <div class="section-divider"></div>
-
-            <!-- Why Solana Section -->
-            <section id="solana-advantage" class="py-12">
-                <div class="container mx-auto px-6">
-                    <h2 class="text-5xl heading-font text-center mb-4">Why Solana?</h2>
-                    <h3 class="text-4xl heading-font text-center brand-text mb-12">Because this chain is built for maniacs.</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="stone-card">
-                            <h3 class="text-3xl heading-font mb-2">Fees? Pennies.</h3>
-                        </div>
-                        <div class="stone-card">
-                            <h3 class="text-3xl heading-font mb-2">Speed? Instant.</h3>
-                        </div>
-                        <div class="stone-card">
-                            <h3 class="text-3xl heading-font mb-2">Culture? Pure meme energy.</h3>
-                        </div>
-                    </div>
+            </div>
+        </section>
+        
+        <!-- Community Hub Section -->
+        <section id="community" class="py-24 mt-12" style="background-color: var(--bg-stone);">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-5xl heading-font text-brand-dark-brown leading-tight mb-4">Join the Legion</h2>
+                <p class="text-xl max-w-3xl mx-auto text-text-light-brown">This isn’t a community. It’s a crusade. A chaotic, disciplined, and relentlessly positive swarm dedicated to the pump. Find your post and join the fight.</p>
+                <div class="mt-8 flex justify-center space-x-4">
+                    <a href="https://twitter.com" target="_blank" class="social-icon-wrapper" title="Follow on X">
+                        <svg class="h-6 w-6 text-brand-dark-brown" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                    </a>
+                    <a href="https://t.me" target="_blank" class="social-icon-wrapper" title="Join on Telegram">
+                        <svg class="h-6 w-6 text-brand-dark-brown" fill="currentColor" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.3-3.16-2.1 2.02c-.23.23-.42.42-.83.42z"/></svg>
+                    </a>
+                    <a href="https://discord.com" target="_blank" class="social-icon-wrapper" title="Enter the Discord">
+                        <svg class="h-6 w-6 text-brand-dark-brown" fill="currentColor" viewBox="0 0 24 24"><path d="M20.3,3.5C18.8,3 17.2,3 17.2,3L16.8,3.6C18.4,4.2 19.6,5.2 20.2,6.4C19.1,5.8 17.8,5.3 16.4,5C16.4,5 16.3,4.9 16.2,4.9C14.2,4.3 12.1,4.3 10.1,4.9C10,4.9 9.9,5 9.9,5C8.5,5.3 7.2,5.8 6.1,6.4C6.7,5.2 7.9,4.2 9.5,3.6L9.1,3S7.5,3 6,3.5C3.1,4.9 1.7,8.2 2.2,11.5C3.3,15.2 6.4,17.6 10.1,17.8C10.1,17.8 10.3,17.5 10.5,17.3C9.2,16.8 8.2,16 7.6,15C7.6,15 7.6,15 7.6,14.9C10.2,16.1 13.1,16.1 15.7,14.9C15.7,15 15.7,15 15.7,15C15.1,16 14.1,16.8 12.8,17.3C13,17.5 13.2,17.8 13.2,17.8C16.9,17.6 20,15.2 21.1,11.5C21.6,8.2 20.2,4.9 20.3,3.5M10,12.8C9,12.8 8.2,12 8.2,11S9,9.2 10,9.2S11.8,10 11.8,11S11,12.8 10,12.8M14.7,12.8C13.7,12.8 12.9,12 12.9,11S13.7,9.2 14.7,9.2S16.5,10 16.5,11S15.7,12.8 14.7,12.8Z" fill="currentColor"/></svg>
+                    </a>
                 </div>
-            </section>
-            
-            <div class="section-divider"></div>
-
-            <!-- Pumpinomics Section -->
-            <section id="pumpinomics" class="py-12 bg-parchment-darker">
-                <div class="container mx-auto px-6">
-                    <h2 class="text-5xl heading-font text-center mb-4">Pumpinomics:</h2>
-                     <h3 class="text-4xl heading-font text-center brand-text mb-12">No Rugs. Only Pump.</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-center">
-                        <div class="stone-card">
-                            <h3 class="text-2xl heading-font">0% Taxes</h3>
-                        </div>
-                        <div class="stone-card">
-                            <h3 class="text-2xl heading-font">100% LP Burn</h3>
-                        </div>
-                        <div class="stone-card">
-                            <h3 class="text-2xl heading-font">Contract Renounced</h3>
-                        </div>
-                        <div class="stone-card">
-                             <h3 class="text-2xl heading-font">Community Allocation</h3>
-                             <p class="text-light-brown">40% Airdrop / 40% LP / 20% Treasury</p>
-                        </div>
-                         <div class="stone-card">
-                            <h3 class="text-2xl heading-font">No Team Allocation</h3>
-                            <p class="text-light-brown">Founders ape like everyone else</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="section-divider"></div>
-
-            <!-- Roadmap Section -->
-            <section id="roadmap" class="container mx-auto px-6 py-12">
-                <h2 class="text-5xl heading-font text-center mb-24">The <span class="brand-text">Path of the Pump</span></h2>
-                <div class="relative">
-                    <div class="roadmap-line"></div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                        <div class="roadmap-item">
-                            <div class="dot mx-auto mb-4"></div>
-                            <h4 class="heading-font text-2xl">Phase 1: The Great Pumpening</h4>
-                        </div>
-                        <div class="roadmap-item">
-                            <div class="dot mx-auto mb-4"></div>
-                            <h4 class="heading-font text-2xl">Phase 2: Pump Station Launch</h4>
-                        </div>
-                        <div class="roadmap-item">
-                            <div class="dot mx-auto mb-4"></div>
-                            <h4 class="heading-font text-2xl">Phase 3: Eternal Pump Loop</h4>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Community Hub Section -->
-            <section id="community-hub" class="py-24 mt-12" style="background-color: #e9e0cf;">
-                <div class="container mx-auto px-6 text-center">
-                     <h2 class="text-5xl heading-font text-dark-brown leading-tight mb-4">Join Us</h2>
-                     <p class="text-xl max-w-3xl mx-auto text-light-brown">Degens. Meme lords. Unhinged optimists. Pump your posts. Pump your bags. Stay pumpin’.</p>
-                     <div class="mt-8 flex justify-center space-x-4">
-                         <a href="https://twitter.com" target="_blank" class="bg-dark-brown hover:bg-black p-4 rounded-full transition duration-300" title="Twitter">
-                             <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-                         </a>
-                         <a href="https://t.me" target="_blank" class="bg-dark-brown hover:bg-black p-4 rounded-full transition duration-300" title="Telegram">
-                             <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M11.94 1.76l-.49 4.35 15.65-7.79zm-10.74 3.79l-1.46 7.42 16.51-14.73zM5.7 19.34l.11-.47 1.83-8.91 16.51-14.73zM21.5 21.99l-2.07-.6-1.07-5.5-16.11 14.88 4.7 1.63z" fill="currentColor"/></svg>
-                         </a>
-                         <a href="https://discord.com" target="_blank" class="bg-dark-brown hover:bg-black p-4 rounded-full transition duration-300" title="Discord">
-                             <svg class="h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20.3,3.5C18.8,3 17.2,3 17.2,3L16.8,3.6C18.4,4.2 19.6,5.2 20.2,6.4C19.1,5.8 17.8,5.3 16.4,5C16.4,5 16.3,4.9 16.2,4.9C14.2,4.3 12.1,4.3 10.1,4.9C10,4.9 9.9,5 9.9,5C8.5,5.3 7.2,5.8 6.1,6.4C6.7,5.2 7.9,4.2 9.5,3.6L9.1,3S7.5,3 6,3.5C3.1,4.9 1.7,8.2 2.2,11.5C3.3,15.2 6.4,17.6 10.1,17.8C10.1,17.8 10.3,17.5 10.5,17.3C9.2,16.8 8.2,16 7.6,15C7.6,15 7.6,15 7.6,14.9C10.2,16.1 13.1,16.1 15.7,14.9C15.7,15 15.7,15 15.7,15C15.1,16 14.1,16.8 12.8,17.3C13,17.5 13.2,17.8 13.2,17.8C16.9,17.6 20,15.2 21.1,11.5C21.6,8.2 20.2,4.9 20.3,3.5M10,12.8C9,12.8 8.2,12 8.2,11S9,9.2 10,9.2S11.8,10 11.8,11S11,12.8 10,12.8M14.7,12.8C13.7,12.8 12.9,12 12.9,11S13.7,9.2 14.7,9.2S16.5,10 16.5,11S15.7,12.8 14.7,12.8Z" fill="currentColor"/></svg>
-                         </a>
-                     </div>
-                </div>
-            </section>
-        </main>
-    </div>
+                 <p class="text-xl heading-font brand-text mt-8">Stay Pumpin'.</p>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="py-8" style="background-color: #3a312b;">
-        <div class="container mx-auto px-6 text-center text-gray-400">
-            <p class="font-bold text-parchment">Powered by Solana. Fueled by Degens.</p>
-            <p class="mt-2 text-xs text-gray-400">&copy; 2025 by $Pumpin. This is a meme coin with real utility, but it’s still crypto – do your own research.</p>
+    <footer class="py-8" style="border-top: 2px solid var(--border-scroll);">
+        <div class="container mx-auto px-6 text-center text-text-light-brown">
+            <p class="font-bold" style="color: var(--brand-parchment);">Powered by Solana. Fueled by Degens.</p>
+            <p class="mt-2 text-xs">&copy; 2025 $PUMPIN. $PUMPIN is a meme coin with a real utility backbone, created for entertainment purposes. The cryptocurrency market is volatile; always do your own research and invest responsibly.</p>
         </div>
     </footer>
-
+</div>
 </body>
 </html>
