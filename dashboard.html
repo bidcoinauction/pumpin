@@ -322,118 +322,191 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const realmTabs = document.querySelectorAll('#realm-tabs .social-tab');
-            const servicePanels = {
-                instagram: document.getElementById('instagram-services'),
-                youtube: document.getElementById('youtube-services'),
-                twitter: document.getElementById('twitter-services'),
-                discord: document.getElementById('discord-services'),
+  <script>
+const JAP_API_KEY = "a7010990900670d66aee40f4ceb46122";
+const API_URL = "https://justanotherpanel.com/api/v2";
+
+const realmTabs = document.querySelectorAll('#realm-tabs .social-tab');
+const servicePanels = {
+    instagram: document.getElementById('instagram-services'),
+    youtube: document.getElementById('youtube-services'),
+    twitter: document.getElementById('twitter-services'),
+    discord: document.getElementById('discord-services'),
+};
+
+const scrollHeader = document.getElementById('scroll-header');
+const quantityInput = document.getElementById('quantity');
+const linkInput = document.getElementById('link');
+
+const placeholder = document.getElementById('order-details-placeholder');
+const summary = document.getElementById('order-summary');
+const summaryServiceName = document.getElementById('summary-service-name');
+const summaryServicePrice = document.getElementById('summary-service-price');
+const totalCostEl = document.getElementById('total-cost');
+const placeOrderBtn = document.getElementById('place-order-btn');
+
+let selectedService = null;
+
+function calculateCost() {
+    if (!selectedService || !quantityInput.value) {
+        totalCostEl.textContent = '0 $PUMPIN';
+        return;
+    }
+    const quantity = parseInt(quantityInput.value, 10);
+    const pricePer1k = parseFloat(selectedService.price);
+    if (isNaN(quantity) || quantity <= 0) {
+        totalCostEl.textContent = '0 $PUMPIN';
+        return;
+    }
+    const cost = (pricePer1k / 1000) * quantity;
+    totalCostEl.textContent = `${cost.toFixed(4).replace(/\.?0+$/, '')} $PUMPIN`;
+    validateForm();
+}
+
+function validateForm() {
+    const isServiceSelected = !!selectedService;
+    const isLinkValid = linkInput.value.trim().startsWith('http');
+    const isQuantityValid = parseInt(quantityInput.value, 10) > 0;
+    placeOrderBtn.disabled = !(isServiceSelected && isLinkValid && isQuantityValid);
+}
+
+function resetOrderForm() {
+    selectedService = null;
+    placeholder.classList.remove('hidden');
+    summary.classList.add('hidden');
+    linkInput.value = '';
+    quantityInput.value = '';
+    totalCostEl.textContent = '0 $PUMPIN';
+    placeOrderBtn.disabled = true;
+    document.querySelectorAll('.service-row').forEach(r => r.classList.remove('selected'));
+}
+
+function bindServiceRowEvents(realm) {
+    const rows = servicePanels[realm]?.querySelectorAll('.service-row') || [];
+    rows.forEach(row => {
+        row.addEventListener('click', () => {
+            document.querySelectorAll('.service-row').forEach(r => r.classList.remove('selected'));
+            row.classList.add('selected');
+            selectedService = {
+                id: row.dataset.id,
+                price: row.dataset.price,
+                name: row.dataset.name,
             };
-            const scrollHeader = document.getElementById('scroll-header');
-            const quantityInput = document.getElementById('quantity');
-            const linkInput = document.getElementById('link');
-            
-            const placeholder = document.getElementById('order-details-placeholder');
-            const summary = document.getElementById('order-summary');
-            const summaryServiceName = document.getElementById('summary-service-name');
-            const summaryServicePrice = document.getElementById('summary-service-price');
-            const totalCostEl = document.getElementById('total-cost');
-            const placeOrderBtn = document.getElementById('place-order-btn');
-
-            let selectedService = null;
-
-            function calculateCost() {
-                if (!selectedService || !quantityInput.value) {
-                    totalCostEl.textContent = '0 $PUMPIN';
-                    return;
-                }
-                const quantity = parseInt(quantityInput.value, 10);
-                const pricePer1k = parseFloat(selectedService.price);
-
-                if (isNaN(quantity) || quantity <= 0) {
-                    totalCostEl.textContent = '0 $PUMPIN';
-                    return;
-                }
-
-                const cost = (pricePer1k / 1000) * quantity;
-                totalCostEl.textContent = `${cost.toFixed(4).replace(/\.?0+$/, '')} $PUMPIN`;
-                validateForm();
-            }
-            
-            function validateForm() {
-                const isServiceSelected = !!selectedService;
-                const isLinkValid = linkInput.value.trim().startsWith('http');
-                const isQuantityValid = parseInt(quantityInput.value, 10) > 0;
-                
-                placeOrderBtn.disabled = !(isServiceSelected && isLinkValid && isQuantityValid);
-            }
-
-            function resetOrderForm() {
-                selectedService = null;
-                placeholder.classList.remove('hidden');
-                summary.classList.add('hidden');
-                linkInput.value = '';
-                quantityInput.value = '';
-                totalCostEl.textContent = '0 $PUMPIN';
-                placeOrderBtn.disabled = true;
-                document.querySelectorAll('.service-row').forEach(r => r.classList.remove('selected'));
-            }
-
-            function bindServiceRowEvents(panelId) {
-                const serviceRows = servicePanels[panelId].querySelectorAll('.service-row');
-                serviceRows.forEach(row => {
-                    row.addEventListener('click', () => {
-                        document.querySelectorAll('.service-row').forEach(r => r.classList.remove('selected'));
-                        row.classList.add('selected');
-
-                        selectedService = {
-                            id: row.dataset.id,
-                            price: row.dataset.price,
-                            name: row.dataset.name,
-                        };
-
-                        placeholder.classList.add('hidden');
-                        summary.classList.remove('hidden');
-                        summaryServiceName.textContent = selectedService.name;
-                        summaryServicePrice.textContent = selectedService.price;
-                        
-                        calculateCost();
-                        validateForm();
-                    });
-                });
-            }
-
-            realmTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const realm = tab.dataset.realm;
-
-                    // Update tabs
-                    realmTabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-
-                    // Update header
-                    scrollHeader.textContent = `The Sacred Scroll of ${tab.textContent}`;
-
-                    // Update visible panel
-                    for (const panelKey in servicePanels) {
-                        servicePanels[panelKey].classList.add('hidden');
-                    }
-                    servicePanels[realm].classList.remove('hidden');
-
-                    // Reset form and re-bind events
-                    resetOrderForm();
-                    bindServiceRowEvents(realm);
-                });
-            });
-
-            // Initial setup
-            bindServiceRowEvents('instagram');
-            quantityInput.addEventListener('input', calculateCost);
-            linkInput.addEventListener('input', validateForm);
+            placeholder.classList.add('hidden');
+            summary.classList.remove('hidden');
+            summaryServiceName.textContent = selectedService.name;
+            summaryServicePrice.textContent = selectedService.price;
+            calculateCost();
+            validateForm();
         });
-    </script>
+    });
+}
+
+function populateServiceScrolls(services) {
+    Object.keys(servicePanels).forEach(realm => {
+        const tbody = servicePanels[realm].querySelector("tbody");
+        tbody.innerHTML = "";
+    });
+
+    services.forEach(service => {
+        let realm;
+        if (/instagram/i.test(service.category)) realm = "instagram";
+        else if (/youtube/i.test(service.category)) realm = "youtube";
+        else if (/twitter|x\b/i.test(service.category)) realm = "twitter";
+        else if (/discord/i.test(service.category)) realm = "discord";
+        else return;
+
+        const tbody = servicePanels[realm].querySelector("tbody");
+        const row = document.createElement("tr");
+        row.className = "service-row border-b-2 border-border-scroll";
+        row.dataset.id = service.service;
+        row.dataset.price = service.rate;
+        row.dataset.name = service.name;
+        row.innerHTML = `
+            <td class="p-4 text-text-light-brown">${service.service}</td>
+            <td class="p-4 text-brand-dark-brown font-semibold">${service.name}</td>
+            <td class="p-4 text-brand-dark-brown font-bold text-right">${service.rate}</td>
+        `;
+        tbody.appendChild(row);
+    });
+
+    bindServiceRowEvents(document.querySelector('.social-tab.active')?.dataset.realm || "instagram");
+}
+
+async function fetchJAPServices() {
+    const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: JAP_API_KEY, action: "services" })
+    });
+    const data = await res.json();
+    populateServiceScrolls(data);
+}
+
+async function fetchBalance() {
+    const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: JAP_API_KEY, action: "balance" })
+    });
+    const data = await res.json();
+    const el = document.createElement("p");
+    el.textContent = `Current JAP Balance: $${parseFloat(data.balance).toFixed(2)}`;
+    el.className = "text-sm text-text-light-brown mt-2 text-center";
+    document.querySelector("header").appendChild(el);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    realmTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const realm = tab.dataset.realm;
+            realmTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            scrollHeader.textContent = `The Sacred Scroll of ${tab.textContent}`;
+            for (const key in servicePanels) servicePanels[key].classList.add('hidden');
+            servicePanels[realm].classList.remove('hidden');
+            resetOrderForm();
+            bindServiceRowEvents(realm);
+        });
+    });
+
+    quantityInput.addEventListener('input', calculateCost);
+    linkInput.addEventListener('input', validateForm);
+
+    placeOrderBtn.addEventListener('click', async () => {
+        const quantity = parseInt(quantityInput.value, 10);
+        const link = linkInput.value.trim();
+        if (!selectedService || !quantity || !link.startsWith("http")) return;
+        const payload = {
+            key: JAP_API_KEY,
+            action: "add",
+            service: selectedService.id,
+            quantity,
+            link
+        };
+        try {
+            const res = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.order) {
+                alert(`🧙 Order #${data.order} placed successfully!`);
+                resetOrderForm();
+            } else {
+                alert(`❌ Failed: ${JSON.stringify(data)}`);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("❌ Network error occurred.");
+        }
+    });
+
+    fetchBalance();
+    fetchJAPServices();
+});
+</script>
 </body>
 </html>
 
