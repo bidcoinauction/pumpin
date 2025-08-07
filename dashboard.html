@@ -326,6 +326,12 @@
 const JAP_API_KEY = "a7010990900670d66aee40f4ceb46122";
 const API_URL = "https://justanotherpanel.com/api/v2";
 
+let SIMULATED_PUMPIN_USD = 0.0123; // simulate $PUMPIN/USD price for now
+
+async function fetchPumpinPriceUSD() {
+    return SIMULATED_PUMPIN_USD;
+}
+
 const realmTabs = document.querySelectorAll('#realm-tabs .social-tab');
 const servicePanels = {
     instagram: document.getElementById('instagram-services'),
@@ -411,7 +417,7 @@ function bindServiceRowEvents(realm) {
     });
 }
 
-function populateServiceScrolls(services) {
+function populateServiceScrolls(services, pumpinPrice) {
     Object.keys(servicePanels).forEach(realm => {
         const tbody = servicePanels[realm].querySelector("tbody");
         tbody.innerHTML = "";
@@ -423,14 +429,18 @@ function populateServiceScrolls(services) {
 
         const tbody = servicePanels[realm].querySelector("tbody");
         const row = document.createElement("tr");
+
+        const usdRate = parseFloat(service.rate);
+        const pumpinRate = usdRate / pumpinPrice;
+
         row.className = "service-row border-b-2 border-border-scroll";
         row.dataset.id = service.service;
-        row.dataset.price = service.rate;
+        row.dataset.price = pumpinRate.toFixed(6);
         row.dataset.name = service.name;
         row.innerHTML = `
             <td class="p-4 text-text-light-brown">${service.service}</td>
             <td class="p-4 text-brand-dark-brown font-semibold">${service.name}</td>
-            <td class="p-4 text-brand-dark-brown font-bold text-right">${service.rate}</td>
+            <td class="p-4 text-brand-dark-brown font-bold text-right">${pumpinRate.toFixed(6)} $PUMPIN</td>
         `;
         tbody.appendChild(row);
     });
@@ -439,13 +449,16 @@ function populateServiceScrolls(services) {
 }
 
 async function fetchJAPServices() {
-    const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ key: JAP_API_KEY, action: "services" })
-    });
-    const data = await res.json();
-    populateServiceScrolls(data);
+    const [servicesRes, pumpinPrice] = await Promise.all([
+        fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ key: JAP_API_KEY, action: "services" })
+        }).then(res => res.json()),
+        fetchPumpinPriceUSD()
+    ]);
+
+    populateServiceScrolls(servicesRes, pumpinPrice);
 }
 
 async function fetchBalance() {
