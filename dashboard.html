@@ -322,7 +322,7 @@
         </div>
     </div>
 
-  <script>
+<script>
 const JAP_API_KEY = "a7010990900670d66aee40f4ceb46122";
 const API_URL = "https://justanotherpanel.com/api/v2";
 
@@ -346,6 +346,15 @@ const totalCostEl = document.getElementById('total-cost');
 const placeOrderBtn = document.getElementById('place-order-btn');
 
 let selectedService = null;
+
+function resolveRealm(category) {
+    category = category.toLowerCase();
+    if (category.includes("instagram")) return "instagram";
+    if (category.includes("youtube")) return "youtube";
+    if (category.includes("twitter") || category.includes("x")) return "twitter";
+    if (category.includes("discord")) return "discord";
+    return null;
+}
 
 function calculateCost() {
     if (!selectedService || !quantityInput.value) {
@@ -409,12 +418,8 @@ function populateServiceScrolls(services) {
     });
 
     services.forEach(service => {
-        let realm;
-        if (/instagram/i.test(service.category)) realm = "instagram";
-        else if (/youtube/i.test(service.category)) realm = "youtube";
-        else if (/twitter|x\b/i.test(service.category)) realm = "twitter";
-        else if (/discord/i.test(service.category)) realm = "discord";
-        else return;
+        const realm = resolveRealm(service.category);
+        if (!realm) return;
 
         const tbody = servicePanels[realm].querySelector("tbody");
         const row = document.createElement("tr");
